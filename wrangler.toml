@@ -1,0 +1,7 @@
+name = "tryoutdoors-rice"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "out"
+
+[[kv_namespaces]]
+binding = "WAITLIST_EMAILS"
+id = "b8629237d9a045d59ba335cd39fde8c4"

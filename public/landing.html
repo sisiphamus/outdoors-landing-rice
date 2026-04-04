@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="personal">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outdoors — AI That Actually Does the Work</title>
+<meta name="description" content="Outdoors is a textable AI agent that sends emails, manages your calendar, and drafts polished work from a voice note.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS CUSTOM PROPERTIES — MODE SYSTEM
+   ============================================ */
+:root {
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --transition-mode: 500ms ease;
+  --transition-fast: 200ms ease;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 100px;
+  --max-w: 1140px;
+  --nav-h: 68px;
+}
+
+/* Personal / Dark Mode (default) */
+[data-mode="personal"] {
+  --bg: #141413;
+  --bg-surface: #1E1E1B;
+  --bg-surface-2: #282824;
+  --text-primary: #F5F0E8;
+  --text-secondary: #A89F91;
+  --text-muted: #6B6560;
+  --accent: #C8A45E;
+  --accent-hover: #D4B76A;
+  --accent-subtle: rgba(200,164,94,0.1);
+  --border: #2A2A26;
+  --border-hover: #3A3A35;
+  --card-bg: #1A1A17;
+  --card-hover: #222220;
+  --nav-bg: rgba(20,20,19,0.85);
+  --cta-bg: #C8A45E;
+  --cta-text: #141413;
+  --cta-hover: #D4B76A;
+  --pill-bg: #1E1E1B;
+  --pill-active-bg: #C8A45E;
+  --pill-active-text: #141413;
+  --pill-inactive-text: #A89F91;
+  --section-alt-bg: #1A1917;
+  --pricing-recommended: #C8A45E;
+  --hero-gradient: linear-gradient(180deg, #141413 0%, #1A1917 100%);
+  --final-cta-bg: #1E1B14;
+}
+
+/* Enterprise / Light Mode */
+[data-mode="enterprise"] {
+  --bg: #FAFAF8;
+  --bg-surface: #F2F2EF;
+  --bg-surface-2: #E8E8E4;
+  --text-primary: #1A1A1F;
+  --text-secondary: #55555D;
+  --text-muted: #8E8E96;
+  --accent: #2C3E6B;
+  --accent-hover: #3A4F80;
+  --accent-subtle: rgba(44,62,107,0.08);
+  --border: #DDDDD8;
+  --border-hover: #C8C8C2;
+  --card-bg: #FFFFFF;
+  --card-hover: #F8F8F6;
+  --nav-bg: rgba(250,250,248,0.88);
+  --cta-bg: #2C3E6B;
+  --cta-text: #FFFFFF;
+  --cta-hover: #3A4F80;
+  --pill-bg: #F0F0EE;
+  --pill-active-bg: #2C3E6B;
+  --pill-active-text: #FFFFFF;
+  --pill-inactive-text: #6B6B73;
+  --section-alt-bg: #F5F5F2;
+  --pricing-recommended: #2C3E6B;
+  --hero-gradient: linear-gradient(180deg, #FAFAF8 0%, #F5F5F2 100%);
+  --final-cta-bg: #F0EFE8;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text-primary);
+  transition: background var(--transition-mode), color var(--transition-mode);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); }
+
+p {
+  font-size: 1.06rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-mode);
+}
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 96px 0;
+  transition: background var(--transition-mode);
+}
+
+.section-alt { background: var(--section-alt-bg); }
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  transition: color var(--transition-mode);
+}
+
+.section-heading {
+  margin-bottom: 20px;
+  transition: color var(--transition-mode);
+}
+
+.section-sub {
+  max-width: 560px;
+  margin-bottom: 48px;
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--cta-bg);
+  color: var(--cta-text);
+}
+
+.btn-primary:hover {
+  background: var(--cta-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 14px 16px;
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--border);
+  transition: all var(--transition-fast);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-mode);
+}
+
+nav.scrolled {
+  border-bottom-color: var(--border);
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-mode);
+}
+
+.nav-logo .enterprise-name { display: none; }
+.nav-logo .personal-name { display: inline; }
+
+[data-mode="enterprise"] .nav-logo .enterprise-name { display: inline; }
+[data-mode="enterprise"] .nav-logo .personal-name { display: none; }
+
+/* Mode Toggle Pill */
+.mode-toggle {
+  display: flex;
+  background: var(--pill-bg);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  gap: 2px;
+  transition: background var(--transition-mode);
+}
+
+.mode-toggle button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 300ms ease;
+  color: var(--pill-inactive-text);
+  background: transparent;
+}
+
+.mode-toggle button.active {
+  background: var(--pill-active-bg);
+  color: var(--pill-active-text);
+}
+
+.nav-cta {
+  font-size: 0.88rem;
+  padding: 10px 24px;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--nav-h);
+  background: var(--hero-gradient);
+  transition: background var(--transition-mode);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.hero-text { max-width: 540px; }
+
+.hero-overline {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  transition: color var(--transition-mode);
+}
+
+.hero h1 {
+  margin-bottom: 24px;
+  transition: color var(--transition-mode);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+  transition: color var(--transition-mode);
+}
+
+.hero-subtitle {
+  font-size: 1.12rem;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 460px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Phone Mockup */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-mockup {
+  width: 300px;
+  background: #000;
+  border-radius: 36px;
+  padding: 12px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+}
+
+[data-mode="enterprise"] .phone-mockup {
+  box-shadow: 0 40px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+}
+
+.phone-screen {
+  background: #0B141B;
+  border-radius: 26px;
+  overflow: hidden;
+  min-height: 520px;
+}
+
+.phone-header {
+  background: #1F2C33;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phone-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: #000;
+  font-weight: 700;
+}
+
+.phone-header-text {
+  font-size: 0.9rem;
+  color: #E9EDEF;
+  font-weight: 500;
+}
+
+.phone-header-sub {
+  font-size: 0.7rem;
+  color: #8696A0;
+}
+
+.chat-messages {
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-bubble {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.chat-bubble.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 400ms ease;
+}
+
+.chat-user {
+  align-self: flex-end;
+  background: #005C4B;
+  color: #E9EDEF;
+  border-bottom-right-radius: 2px;
+}
+
+.chat-agent {
+  align-self: flex-start;
+  background: #1F2C33;
+  color: #E9EDEF;
+  border-bottom-left-radius: 2px;
+}
+
+.chat-voice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.voice-waves {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.voice-wave {
+  width: 3px;
+  border-radius: 2px;
+  background: #8696A0;
+}
+
+.chat-time {
+  font-size: 0.65rem;
+  color: rgba(233,237,239,0.5);
+  text-align: right;
+  margin-top: 2px;
+}
+
+/* Enterprise Hero Visual */
+.enterprise-visual {
+  display: none;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+  transition: all var(--transition-mode);
+}
+
+[data-mode="enterprise"] .enterprise-visual { display: block; }
+[data-mode="enterprise"] .phone-mockup { display: none; }
+[data-mode="personal"] .enterprise-visual { display: none; }
+[data-mode="personal"] .phone-mockup { display: block; }
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.dashboard-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.dashboard-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  transition: background var(--transition-mode);
+}
+
+.dash-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dash-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.dash-role {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.dash-task {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.dash-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.status-done {
+  background: rgba(76,175,80,0.12);
+  color: #4CAF50;
+}
+
+.status-working {
+  background: rgba(255,183,77,0.12);
+  color: #FFB74D;
+}
+
+/* ============================================
+   HOW IT WORKS
+   ============================================ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.step {
+  position: relative;
+}
+
+.step-number {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  color: var(--accent);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 16px;
+  transition: color var(--transition-mode);
+}
+
+.step-label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  transition: color var(--transition-mode);
+}
+
+.step-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.step-connector {
+  position: absolute;
+  top: 36px;
+  right: -20px;
+  width: 12px;
+  height: 1px;
+  background: var(--border);
+  transition: background var(--transition-mode);
+}
+
+.step:last-child .step-connector { display: none; }
+
+/* ============================================
+   FEATURES BENTO GRID
+   ============================================ */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  transition: all var(--transition-fast), background var(--transition-mode), border-color var(--transition-mode);
+  cursor: default;
+}
+
+.feature-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.feature-card.featured {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.feature-number {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+  transition: color var(--transition-mode);
+}
+
+.feature-card h3 {
+  margin-bottom: 12px;
+  transition: color var(--transition-mode);
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.feature-visual {
+  height: 200px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  overflow: hidden;
+  transition: background var(--transition-mode);
+}
+
+.feature-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+/* ============================================
+   SECURITY
+   ============================================ */
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+[data-mode="enterprise"] .security-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.security-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  transition: all var(--transition-mode);
+}
+
+.security-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: background var(--transition-mode);
+}
+
+.security-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke var(--transition-mode);
+}
+
+.security-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  transition: color var(--transition-mode);
+}
+
+.security-card p {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.enterprise-only { display: none; }
+[data-mode="enterprise"] .enterprise-only { display: block; }
+
+/* ============================================
+   PRICING
+   ============================================ */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  text-align: center;
+  transition: all var(--transition-mode);
+  position: relative;
+}
+
+.pricing-card.recommended {
+  border-color: var(--pricing-recommended);
+  box-shadow: 0 0 0 1px var(--pricing-recommended);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--pricing-recommended);
+  color: var(--cta-text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 16px;
+  border-radius: var(--radius-pill);
+}
+
+.pricing-tier {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  transition: color var(--transition-mode);
+}
+
+.pricing-amount {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+  transition: color var(--transition-mode);
+}
+
+.pricing-period {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  transition: color var(--transition-mode);
+}
+
+.pricing-features {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.pricing-features li {
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition-mode), border-color var(--transition-mode);
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+
+.pricing-card .btn { width: 100%; }
+
+/* Enterprise Pricing */
+.pricing-enterprise { display: none; }
+.pricing-personal { display: grid; }
+[data-mode="enterprise"] .pricing-enterprise { display: grid; }
+[data-mode="enterprise"] .pricing-personal { display: none; }
+
+.pricing-enterprise {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   FINAL CTA
+   ============================================ */
+.final-cta {
+  background: var(--final-cta-bg);
+  text-align: center;
+  transition: background var(--transition-mode);
+}
+
+.final-cta h2 {
+  margin-bottom: 16px;
+}
+
+.final-cta p {
+  max-width: 440px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+}
+
+.waitlist-form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  max-width: 440px;
+  margin: 0 auto 16px;
+}
+
+.waitlist-form input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all var(--transition-mode);
+}
+
+.waitlist-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.waitlist-form input:focus {
+  border-color: var(--accent);
+}
+
+.final-cta .note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.enterprise-cta-section { display: none; }
+.personal-cta-section { display: block; }
+[data-mode="enterprise"] .enterprise-cta-section { display: block; }
+[data-mode="enterprise"] .personal-cta-section { display: none; }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  transition: border-color var(--transition-mode);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  transition: color var(--transition-mode);
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover { color: var(--text-primary); }
+
+.footer-legal {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  transition: color var(--transition-mode);
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+.reveal-delay-4 { transition-delay: 400ms; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+  .hero-text { max-width: 100%; }
+  .hero-subtitle { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { order: -1; }
+  .phone-mockup { width: 260px; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .step-connector { display: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+  .security-grid { grid-template-columns: repeat(2, 1fr); }
+  [data-mode="enterprise"] .security-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .pricing-enterprise { grid-template-columns: 1fr; max-width: 400px; }
+  section { padding: 80px 0; }
+}
+
+@media (max-width: 600px) {
+  nav { padding: 0 16px; }
+  .nav-cta { display: none; }
+  .mode-toggle button { padding: 8px 14px; font-size: 0.78rem; }
+  .container { padding: 0 16px; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .security-grid { grid-template-columns: 1fr; }
+  [data-mode="enterprise"] .security-grid { grid-template-columns: 1fr; }
+  .waitlist-form { flex-direction: column; }
+  .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+  section { padding: 64px 0; }
+}
+
+/* Accent line under nav */
+nav::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-mode);
+}
+
+nav.scrolled::after {
+  opacity: 0.3;
+}
+
+/* Phone glow on hover */
+.phone-mockup:hover {
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 40px rgba(200,164,94,0.08);
+}
+
+[data-mode="enterprise"] .enterprise-visual:hover {
+  box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+  border-color: var(--border-hover);
+}
+
+/* Pricing card hover */
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .chat-bubble { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <span class="personal-name">outdoors</span>
+    <span class="enterprise-name">EVEREST</span>
+  </a>
+  <div class="mode-toggle">
+    <button class="active" data-target="personal" onclick="setMode('personal')">Personal</button>
+    <button data-target="enterprise" onclick="setMode('enterprise')">Enterprise</button>
+  </div>
+  <a href="#final-cta" class="btn btn-primary nav-cta">
+    <span class="personal-content">Join Waitlist</span>
+    <span class="enterprise-content" style="display:none;">Request Demo</span>
+  </a>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-overline reveal">
+          <span class="personal-content">Your AI that actually works</span>
+          <span class="enterprise-content" style="display:none;">AI workforce for your organization</span>
+        </div>
+        <h1 class="reveal reveal-delay-1">
+          <span class="personal-content">Tired of productivity apps that organize but <em>don't do work?</em></span>
+          <span class="enterprise-content" style="display:none;">Not just an assistant. Another <em>employee.</em> A fraction of the cost.</span>
+        </h1>
+        <p class="hero-subtitle reveal reveal-delay-2">
+          <span class="personal-content">Outdoors is a textable AI agent that sends emails, manages your calendar, and drafts polished work from a voice note.</span>
+          <span class="enterprise-content" style="display:none;">Everest deploys AI agents across your team that handle work through your existing tools. Email, scheduling, documents, done.</span>
+        </p>
+        <div class="hero-actions reveal reveal-delay-3">
+          <span class="personal-content">
+            <a href="#final-cta" class="btn btn-primary">Join Waitlist</a>
+            <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+          </span>
+          <span class="enterprise-content" style="display:none;">
+            <a href="#final-cta" class="btn btn-primary">Request a Demo</a>
+            <a href="#pricing" class="btn btn-ghost">See pricing</a>
+          </span>
+        </div>
+      </div>
+      <div class="hero-visual reveal reveal-delay-2">
+        <!-- Personal: Phone Mockup -->
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="phone-header">
+              <div class="phone-avatar">O</div>
+              <div>
+                <div class="phone-header-text">Outdoors</div>
+                <div class="phone-header-sub">online</div>
+              </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+              <div class="chat-bubble chat-user">
+                <div class="chat-voice">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8696A0" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+                  <div class="voice-waves">
+                    <div class="voice-wave" style="height:8px"></div>
+                    <div class="voice-wave" style="height:14px"></div>
+                    <div class="voice-wave" style="height:6px"></div>
+                    <div class="voice-wave" style="height:18px"></div>
+                    <div class="voice-wave" style="height:10px"></div>
+                    <div class="voice-wave" style="height:15px"></div>
+                    <div class="voice-wave" style="height:7px"></div>
+                    <div class="voice-wave" style="height:12px"></div>
+                    <div class="voice-wave" style="height:5px"></div>
+                  </div>
+                  <span style="font-size:0.72rem;color:#8696A0">0:12</span>
+                </div>
+                <div class="chat-time">9:41 AM</div>
+              </div>
+              <div class="chat-bubble chat-agent">
+                Email sent to Dr. Chen referencing her CRISPR gene therapy paper. Mentioned your interest in summer research positions. Follow-up reminder set for Thursday.
+                <div class="chat-time">9:42 AM</div>
+              </div>
+              <div class="chat-bubble chat-user">
+                What do I have tomorrow?
+                <div class="chat-time">9:42 AM</div>
+              </div>
+              <div class="chat-bubble chat-agent">
+                Tomorrow you have:<br>
+                9:00 AM - Organic Chemistry<br>
+                1:00 PM - Clinical shadowing<br>
+                7:00 PM - Study group<br><br>
+                I blocked 5:00-6:30 PM for MCAT prep.
+                <div class="chat-time">9:42 AM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Enterprise: Dashboard -->
+        <div class="enterprise-visual">
+          <div class="dashboard-header">
+            <div class="dashboard-title">Team Activity</div>
+            <div class="dashboard-badge">3 agents active</div>
+          </div>
+          <div class="dashboard-rows">
+            <div class="dashboard-row">
+              <img class="dash-avatar" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=72&h=72&fit=crop&crop=face" alt="">
+              <div>
+                <div class="dash-name">Dr. Sarah Kim</div>
+                <div class="dash-role">Research Fellow</div>
+              </div>
+              <div class="dash-task">Grant proposal draft</div>
+              <div class="dash-status status-done">Sent</div>
+            </div>
+            <div class="dashboard-row">
+              <img class="dash-avatar" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=72&h=72&fit=crop&crop=face" alt="">
+              <div>
+                <div class="dash-name">James Okafor</div>
+                <div class="dash-role">Medical Trainee</div>
+              </div>
+              <div class="dash-task">PI outreach emails</div>
+              <div class="dash-status status-working">Working</div>
+            </div>
+            <div class="dashboard-row">
+              <img class="dash-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=72&h=72&fit=crop&crop=face" alt="">
+              <div>
+                <div class="dash-name">Maria Reyes</div>
+                <div class="dash-role">Paralegal</div>
+              </div>
+              <div class="dash-task">Case brief summary</div>
+              <div class="dash-status status-done">Sent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section id="how-it-works" class="section-alt">
+  <div class="container">
+    <div class="section-label reveal">How it works</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      <span class="personal-content">Voice note in. Polished work out.</span>
+      <span class="enterprise-content" style="display:none;">Deploy, assign, execute, review.</span>
+    </h2>
+    <p class="section-sub reveal reveal-delay-2">
+      <span class="personal-content">Four steps between a thought and a sent email. No laptop required.</span>
+      <span class="enterprise-content" style="display:none;">Give every team member an AI agent that works through their existing tools.</span>
+    </p>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-number">01</div>
+        <div class="step-label">
+          <span class="personal-content">Speak</span>
+          <span class="enterprise-content" style="display:none;">Connect</span>
+        </div>
+        <p class="step-desc">
+          <span class="personal-content">Record a 30-second voice note from your phone between meetings or patients.</span>
+          <span class="enterprise-content" style="display:none;">Link your team's existing email, calendar, and file systems in minutes.</span>
+        </p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-number">02</div>
+        <div class="step-label">
+          <span class="personal-content">Context</span>
+          <span class="enterprise-content" style="display:none;">Assign</span>
+        </div>
+        <p class="step-desc">
+          <span class="personal-content">Outdoors pulls from your laptop: email threads, files, calendar, research papers.</span>
+          <span class="enterprise-content" style="display:none;">Team members text or voice-note tasks to their Everest agent.</span>
+        </p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-number">03</div>
+        <div class="step-label">
+          <span class="personal-content">Polish</span>
+          <span class="enterprise-content" style="display:none;">Execute</span>
+        </div>
+        <p class="step-desc">
+          <span class="personal-content">Turns your rough thought into professional, ready-to-send work that sounds like you.</span>
+          <span class="enterprise-content" style="display:none;">Each agent drafts work using the employee's real context and files.</span>
+        </p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-number">04</div>
+        <div class="step-label">
+          <span class="personal-content">Send</span>
+          <span class="enterprise-content" style="display:none;">Review</span>
+        </div>
+        <p class="step-desc">
+          <span class="personal-content">Delivered from your real accounts. Not a draft. Done. You never opened a laptop.</span>
+          <span class="enterprise-content" style="display:none;">Approve and send, or let routine tasks flow automatically.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURES ========== -->
+<section id="features">
+  <div class="container">
+    <div class="section-label reveal">Capabilities</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      <span class="personal-content">Your work, handled.</span>
+      <span class="enterprise-content" style="display:none;">Built for teams that can't afford to wait.</span>
+    </h2>
+    <p class="section-sub reveal reveal-delay-2">
+      <span class="personal-content">Not another organizer. An agent that takes real action through your real accounts.</span>
+      <span class="enterprise-content" style="display:none;">Every seat gets a dedicated agent with full access to their workflow.</span>
+    </p>
+    <div class="features-grid">
+      <div class="feature-card featured reveal">
+        <div>
+          <div class="feature-number">i.</div>
+          <h3>
+            <span class="personal-content">Email on autopilot</span>
+            <span class="enterprise-content" style="display:none;">Team-wide deployment</span>
+          </h3>
+          <p>
+            <span class="personal-content">Describe what you need in a voice note. Outdoors reads your email threads, drafts a polished response, and sends it from your Gmail. Personalized, contextual, done.</span>
+            <span class="enterprise-content" style="display:none;">One admin dashboard to deploy, monitor, and manage agents for every team member. Per-seat billing, usage analytics, and granular permissions built in.</span>
+          </p>
+        </div>
+        <div class="feature-visual">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop" alt="Professional at work" loading="lazy">
+        </div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-number">ii.</div>
+        <h3>
+          <span class="personal-content">Calendar intelligence</span>
+          <span class="enterprise-content" style="display:none;">Context-aware agents</span>
+        </h3>
+        <p>
+          <span class="personal-content">Manages scheduling, blocks focus time, resolves conflicts, and sends meeting confirmations. All from a text message.</span>
+          <span class="enterprise-content" style="display:none;">Each agent knows the employee's files, email history, calendar, and workflow. No onboarding lag. Productive from day one.</span>
+        </p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-number">iii.</div>
+        <h3>
+          <span class="personal-content">Research assistant</span>
+          <span class="enterprise-content" style="display:none;">Integration ready</span>
+        </h3>
+        <p>
+          <span class="personal-content">Finds papers, drafts applications, writes grant proposals, and personalizes outreach to professors and PIs using their published work.</span>
+          <span class="enterprise-content" style="display:none;">Works with Gmail, Outlook, Google Drive, Slack, and your existing infrastructure. No migration. No new tools to learn.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECURITY ========== -->
+<section id="security" class="section-alt">
+  <div class="container">
+    <div class="section-label reveal">Security</div>
+    <h2 class="section-heading reveal reveal-delay-1">Your data stays yours.</h2>
+    <p class="section-sub reveal reveal-delay-2">Built with privacy as the foundation, not an afterthought.</p>
+    <div class="security-grid">
+      <div class="security-card reveal">
+        <div class="security-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Runs locally</h3>
+        <p>Your agent operates on your machine. We never see your passwords or credentials.</p>
+      </div>
+      <div class="security-card reveal reveal-delay-1">
+        <div class="security-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>No data storage</h3>
+        <p>Conversations and actions aren't stored on our servers. Zero data retention by design.</p>
+      </div>
+      <div class="security-card reveal reveal-delay-2">
+        <div class="security-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+        </div>
+        <h3>Encrypted</h3>
+        <p>All communication between your phone, laptop, and AI uses end-to-end encryption.</p>
+      </div>
+      <div class="security-card enterprise-only reveal reveal-delay-3">
+        <div class="security-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Enterprise controls</h3>
+        <p>Admin permissions, audit logs, and SSO integration for full organizational oversight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRICING ========== -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-label reveal">Pricing</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      <span class="personal-content">Simple, transparent pricing.</span>
+      <span class="enterprise-content" style="display:none;">One agent per seat. One price.</span>
+    </h2>
+    <p class="section-sub reveal reveal-delay-2">
+      <span class="personal-content">Start free with your own API key, or let us handle everything.</span>
+      <span class="enterprise-content" style="display:none;">Deploy across your team with full admin controls and support.</span>
+    </p>
+
+    <!-- Personal Pricing -->
+    <div class="pricing-grid pricing-personal reveal">
+      <div class="pricing-card">
+        <div class="pricing-tier">Free</div>
+        <div class="pricing-amount">$0</div>
+        <div class="pricing-period">per month</div>
+        <ul class="pricing-features">
+          <li>Bring your own API key</li>
+          <li>Core agent capabilities</li>
+          <li>Email and calendar</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#final-cta" class="btn btn-outline">Get Started</a>
+      </div>
+      <div class="pricing-card recommended">
+        <div class="pricing-badge">Recommended</div>
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-amount">$30</div>
+        <div class="pricing-period">per month</div>
+        <ul class="pricing-features">
+          <li>Everything included, no key needed</li>
+          <li>All features and integrations</li>
+          <li>Priority task execution</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#final-cta" class="btn btn-primary">Join Waitlist</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Premium</div>
+        <div class="pricing-amount">$100</div>
+        <div class="pricing-period">per month</div>
+        <ul class="pricing-features">
+          <li>Unlimited usage</li>
+          <li>Custom integrations</li>
+          <li>Phone support</li>
+          <li>Early access to new features</li>
+        </ul>
+        <a href="#final-cta" class="btn btn-outline">Join Waitlist</a>
+      </div>
+    </div>
+
+    <!-- Enterprise Pricing -->
+    <div class="pricing-grid pricing-enterprise reveal">
+      <div class="pricing-card recommended">
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-tier">Team</div>
+        <div class="pricing-amount">$200</div>
+        <div class="pricing-period">per seat / month</div>
+        <ul class="pricing-features">
+          <li>Full agent per employee</li>
+          <li>Admin dashboard and analytics</li>
+          <li>All integrations included</li>
+          <li>Dedicated onboarding</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#final-cta" class="btn btn-primary">Request Demo</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Custom</div>
+        <div class="pricing-amount">Custom</div>
+        <div class="pricing-period">tailored to your needs</div>
+        <ul class="pricing-features">
+          <li>Everything in Team</li>
+          <li>Custom AI workflows</li>
+          <li>SLA guarantee</li>
+          <li>Dedicated account manager</li>
+          <li>On-premise option available</li>
+        </ul>
+        <a href="#final-cta" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section id="final-cta" class="final-cta">
+  <div class="container">
+    <div class="personal-cta-section">
+      <h2 class="reveal">Stop organizing. Start doing.</h2>
+      <p class="reveal reveal-delay-1">Join the waitlist for early access to Outdoors.</p>
+      <form class="waitlist-form reveal reveal-delay-2" onsubmit="return handleWaitlist(event)">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit" class="btn btn-primary">Join Waitlist</button>
+      </form>
+      <div class="note reveal reveal-delay-3">Free to start. No credit card required.</div>
+    </div>
+    <div class="enterprise-cta-section">
+      <h2 class="reveal">Give your team superpowers.</h2>
+      <p class="reveal reveal-delay-1">See how Everest can save your team 30+ hours a week.</p>
+      <div class="reveal reveal-delay-2" style="display:flex;gap:12px;justify-content:center;">
+        <a href="mailto:adam@outdoors.dev" class="btn btn-primary">Request a Demo</a>
+        <a href="mailto:adam@outdoors.dev" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="personal-content">outdoors</span>
+        <span class="enterprise-content" style="display:none;">EVEREST</span>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#how-it-works">Product</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="mailto:adam@outdoors.dev">Contact</a></li>
+      </ul>
+      <div class="footer-legal">Built at Rice University</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================
+   MODE TOGGLE
+   ============================================ */
+function setMode(mode) {
+  document.documentElement.setAttribute('data-mode', mode);
+
+  // Update toggle buttons
+  document.querySelectorAll('.mode-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.target === mode);
+  });
+
+  // Toggle content visibility
+  const isEnterprise = mode === 'enterprise';
+  document.querySelectorAll('.personal-content').forEach(el => {
+    el.style.display = isEnterprise ? 'none' : '';
+  });
+  document.querySelectorAll('.enterprise-content').forEach(el => {
+    el.style.display = isEnterprise ? '' : 'none';
+  });
+
+  // Update page title
+  document.title = isEnterprise
+    ? 'Everest — AI Workforce for Your Organization'
+    : 'Outdoors — AI That Actually Does the Work';
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ============================================
+   NAV SCROLL EFFECT
+   ============================================ */
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ============================================
+   CHAT ANIMATION
+   ============================================ */
+function animateChat() {
+  const bubbles = document.querySelectorAll('.chat-bubble');
+  bubbles.forEach((bubble, i) => {
+    setTimeout(() => {
+      bubble.classList.add('visible');
+    }, 600 + (i * 700));
+  });
+}
+
+// Run chat animation when hero is visible
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateChat();
+      heroObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+heroObserver.observe(document.querySelector('.hero'));
+
+/* ============================================
+   WAITLIST FORM
+   ============================================ */
+function handleWaitlist(e) {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  const email = input.value;
+  input.value = '';
+  input.placeholder = 'Thanks! We\'ll be in touch.';
+  setTimeout(() => { input.placeholder = 'Your email address'; }, 3000);
+  return false;
+}
+</script>
+</body>
+</html>
