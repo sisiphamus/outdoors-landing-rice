@@ -8,11 +8,11 @@ const css = `
 /* ── NAV: floating glass pill ── */
 nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(92%,640px);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;border-radius:9999px;backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);-webkit-backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);background:rgba(248,247,244,.6);border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 2px 8px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);transition:background-color .3s var(--snappy),box-shadow .3s var(--snappy)}
 nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.75),0 4px 16px rgba(0,0,0,.12),0 12px 32px rgba(0,0,0,.08)}
-#nav-progress{position:absolute;bottom:0;left:16px;right:16px;height:2px;border-radius:1px;background:var(--accent);width:0%;transition:width .08s linear;opacity:.6}
+#nav-progress{position:absolute;bottom:4px;left:24px;right:24px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--accent),rgba(61,107,61,.4));width:0%;transition:width .08s linear;opacity:.5}
 .logo{font-family:var(--font-display);font-size:1.4rem;color:var(--text-1);text-decoration:none}
 
 /* ── BUTTONS ── */
-.btn-primary{display:inline-flex;align-items:center;padding:10px 24px;border-radius:9999px;border:none;font-family:var(--font-body);font-size:.85rem;font-weight:600;background:var(--accent);color:#fff;cursor:pointer;text-decoration:none;transition:all .2s var(--snappy);box-shadow:0 2px 8px rgba(61,107,61,.3)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(61,107,61,.35)}.btn-primary:active{transform:translateY(0) scale(.988);transition-duration:80ms}
+.btn-primary{display:inline-flex;align-items:center;padding:10px 24px;border-radius:9999px;border:1px solid rgba(255,255,255,.15);font-family:var(--font-body);font-size:.85rem;font-weight:600;background:linear-gradient(180deg,#4a7d4a 0%,#3d6b3d 50%,#336033 100%);color:#fff;cursor:pointer;text-decoration:none;transition:all .25s var(--snappy);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.25),0 1px 3px rgba(0,0,0,.12),0 4px 12px rgba(61,107,61,.3);position:relative;overflow:hidden}.btn-primary::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,0) 100%);border-radius:9999px 9999px 0 0;pointer-events:none}.btn-primary:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.3),0 2px 6px rgba(0,0,0,.15),0 8px 20px rgba(61,107,61,.35)}.btn-primary:active{transform:translateY(0) scale(.985);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.15),0 1px 3px rgba(0,0,0,.1);transition-duration:80ms}
 .btn-phone{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:9999px;border:1.5px solid rgba(61,107,61,.3);font-family:var(--font-body);font-size:.9rem;font-weight:600;background:rgba(61,107,61,.06);color:var(--accent);cursor:pointer;text-decoration:none;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .25s var(--snappy)}.btn-phone:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-1px)}.btn-phone:active{transform:translateY(0) scale(.988);transition-duration:80ms}
 .btn-text{font-size:.88rem;color:var(--text-2);text-decoration:none;border:none;padding:12px 8px 14px;background:none;cursor:pointer;font-family:var(--font-body);font-weight:500;background-image:linear-gradient(var(--accent),var(--accent));background-size:0% 1.5px;background-position:0% 100%;background-repeat:no-repeat;transition:background-size .3s var(--ease),color .2s var(--ease)}.btn-text:hover{color:var(--text-1);background-size:100% 1.5px}
 .dl-alt{display:flex;gap:16px;justify-content:center;margin-top:14px;flex-wrap:wrap}.dl-alt a{font-size:.84rem;color:var(--text-2);text-decoration:none;padding-bottom:3px;background-image:linear-gradient(var(--accent),var(--accent));background-size:0% 1.5px;background-position:0% 100%;background-repeat:no-repeat;transition:background-size .3s var(--ease),color .2s var(--ease)}.dl-alt a:hover{color:var(--accent);background-size:100% 1.5px}
@@ -78,7 +78,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 
 /* ── CTA FINAL ── */
 .cta-final{padding:clamp(48px,8vw,80px) 24px;text-align:center}.cta-final h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;letter-spacing:-.03em;margin-bottom:8px;text-wrap:balance;color:var(--text-1);line-height:1.2}.cta-final>p{color:var(--text-2);font-size:.95rem;margin-bottom:28px;line-height:1.6}
-.nature-word{display:inline-block;width:clamp(100px,14vw,180px);height:clamp(1.8rem,4vw,3rem);border-radius:clamp(6px,1vw,10px);overflow:hidden;vertical-align:bottom;position:relative}.nature-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:natureIn .4s var(--ease) both}@keyframes natureIn{from{opacity:0;transform:scale(1.1)}to{opacity:1;transform:scale(1)}}
+.nature-word{display:inline-block;width:clamp(140px,20vw,260px);height:clamp(2.2rem,5vw,3.8rem);border-radius:clamp(8px,1.2vw,14px);overflow:hidden;vertical-align:bottom;position:relative}.nature-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:natureIn .5s var(--ease) both}@keyframes natureIn{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:scale(1)}}
 .cta-final .limits{font-family:var(--font-display);font-size:clamp(1rem,1.8vw,1.25rem);color:var(--text-2);margin-bottom:32px;letter-spacing:-.01em}.cta-final .limits strong{color:var(--accent);font-weight:400}
 .cta-final .phone-big{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2.2rem);color:var(--accent);text-decoration:none;display:block;margin-bottom:8px;letter-spacing:-.01em;transition:opacity .2s}.cta-final .phone-big:hover{opacity:.7}.cta-final .phone-hint{font-size:.8rem;color:var(--text-3);margin-bottom:0}
 
@@ -159,6 +159,8 @@ export default function Home(){
   const[busyIdx,setBusyIdx]=useState(0);
   const[busyPaused,setBusyPaused]=useState(false);
   const[showDl,setShowDl]=useState(false);
+  const txtPhrases=["Text us","Text Outdoors","Don't text your ex"];
+  const[txtIdx,setTxtIdx]=useState(0);
   const natureImgs=["/images/20251004_144654.webp","/images/20251015_205903.webp","/images/20251122_213844.webp","/images/20251127_083555.webp","/images/20251230_080722.webp","/images/xp-bliss.jpg"];
   const[natureIdx,setNatureIdx]=useState(0);
 
@@ -178,6 +180,12 @@ export default function Home(){
     const id=setInterval(()=>setBusyIdx(p=>(p+1)%busyWords.length),500);
     return()=>clearInterval(id);
   },[busyPaused,busyWords.length]);
+
+  // Text button phrase rotation
+  useEffect(()=>{
+    const id=setInterval(()=>setTxtIdx(p=>(p+1)%txtPhrases.length),2000);
+    return()=>clearInterval(id);
+  },[txtPhrases.length]);
 
   // Nature image rotation
   useEffect(()=>{
@@ -264,7 +272,7 @@ export default function Home(){
       <li>I{"'"}m gonna sleep, can you check my Canvas assignments for this week and send me a wake up email with to-dos</li>
       <li>Tell me what{"'"}s the best servery food today</li>
     </ul>
-    <div className="hero-ctas"><a href="sms:8032920205" className="btn-phone">Text us: (803) 292-0205</a><a href="#steps" className="btn-text">How it works</a></div>
+    <div className="hero-ctas"><a href="sms:8032920205" className="btn-phone">{txtPhrases[txtIdx]}: (803) 292-0205</a><a href="#steps" className="btn-text">How it works</a></div>
   </section>
 
   <div className="phone-wrap"><div className="iphone"><div className="iphone-screen"><div className="di"/><div className="ios-bar"><div className="ios-time">9:15</div><div className="ios-icons"><div className="ios-sig"><span/><span/><span/><span/></div><div className="ios-bt"><div className="ios-bt-b"><div className="ios-bt-f"/></div><div className="ios-bt-t"/></div></div></div><div className="msg-hdr"><span className="msg-back">&lsaquo;</span><div className="msg-av">O</div><div className="msg-name">Outdoors</div></div><div className="msgs" id="waChat"><div className="mt">Today 9:14 AM</div><div className="m o">Email the team I{"'"}ll be 15 min late. Keep it casual.</div><div className="md">Delivered</div><div className="m i">Done. Sent from your Gmail: {"\u201c"}Running ~15 min behind. Start without me.{"\u201d"}</div><div className="m o">Compile all my performative pictures into a file and use them to create a Hinge account.</div><div className="mt">Read 9:14 AM</div><div className="m i">Done. Photos are organized and a Hinge profile draft is ready for review.</div><div className="m o">Build me a landing page.</div><div className="mt">Read 9:15 AM</div><div className="m i">You{"'"}re looking at it.</div></div><div className="msg-in"><div className="msg-field">Message</div><div className="msg-send">+</div></div><div className="ios-home-i"><div className="ios-home-bar"/></div></div></div></div>
@@ -279,6 +287,8 @@ export default function Home(){
 
   <section className="caps"><div className="caps-inner"><div className="sec-hd rv"><div className="lbl">What it does</div><h2>You can automate it all, including emailing a clean email to your prof from your bed that you are indeed: sick</h2></div><div className="caps-grid">{caps.map((c,i)=><div key={c.lbl} className="cap rv" style={{transitionDelay:`${i*60}ms`}}><img className="cap-icon" src={c.icon} alt={c.lbl}/><div className="cap-title">{c.t}</div></div>)}</div></div></section>
 
+  {/* Preload nature images */}
+  <div style={{display:"none"}}>{natureImgs.map(src=><img key={src} src={src} alt=""/>)}</div>
   <section className="cta-final rv" id="download"><h2>Stop wasting time, get <span className="nature-word"><img key={natureIdx} className="nature-img" src={natureImgs[natureIdx]} alt="outdoors"/></span></h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><button className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}} onClick={()=>setShowDl(true)}>Download</button></div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us · that{"'"}s a real person.</p></div></section>
 
   {showDl&&<div className="dl-overlay" onClick={e=>{if(e.target===e.currentTarget)setShowDl(false)}}>
