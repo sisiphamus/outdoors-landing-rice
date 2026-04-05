@@ -157,7 +157,7 @@ export default function Home(){
   const[taskCount,setTaskCount]=useState(0);
   const[bump,setBump]=useState(false);
   const[os,setOs]=useState<OS>("win");
-  const busyWords=["busy work.","emails.","applications.","meetings.","small talk.","spreadsheets.","scheduling.","follow-ups.","Canvas quizzes.","group projects.","cover letters.","data entry."];
+  const busyWords=["busy work.","emails.","applications.","meetings.","small talk.","spreadsheets.","scheduling.","follow-ups.","Canvas announcements.","group projects.","cover letters.","data entry."];
   const[busyIdx,setBusyIdx]=useState(0);
   const[busyPaused,setBusyPaused]=useState(false);
   const[showDl,setShowDl]=useState(false);
@@ -180,7 +180,7 @@ export default function Home(){
   // Busy word rotation
   useEffect(()=>{
     if(busyPaused)return;
-    const id=setInterval(()=>setBusyIdx(p=>(p+1)%busyWords.length),633);
+    const id=setInterval(()=>setBusyIdx(p=>(p+1)%busyWords.length),700);
     return()=>clearInterval(id);
   },[busyPaused,busyWords.length]);
 
