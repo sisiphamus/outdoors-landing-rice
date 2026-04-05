@@ -55,7 +55,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .manifesto-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(100,160,100,.08) 0%,rgba(100,160,100,0) 30%);pointer-events:none}
 .manifesto-glass p{font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,3.2rem);line-height:1.25;color:rgba(255,255,255,.92);letter-spacing:-.03em;text-shadow:0 1px 4px rgba(0,0,0,.25);position:relative;z-index:1}
 .manifesto-glass p span{color:#8ab98a;font-style:italic}
-.busy-rotate{display:inline-block;width:clamp(200px,26vw,360px);text-align:left;cursor:default;vertical-align:baseline;height:1.3em}.busy-word{display:inline-block;animation:busyIn .25s var(--ease) both}@keyframes busyIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.busy-rotate{display:inline;cursor:default}.busy-word{display:inline;animation:busyIn .3s var(--ease) both;white-space:nowrap}@keyframes busyIn{from{opacity:0}to{opacity:1}}
 
 /* ── STEPS: glass cards ── */
 .steps{padding:clamp(72px,10vw,110px) 24px}.steps-inner{max-width:var(--max-w);margin:0 auto}
