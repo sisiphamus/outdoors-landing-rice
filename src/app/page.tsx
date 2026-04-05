@@ -178,7 +178,7 @@ export default function Home(){
   // Busy word rotation
   useEffect(()=>{
     if(busyPaused)return;
-    const id=setInterval(()=>setBusyIdx(p=>(p+1)%busyWords.length),575);
+    const id=setInterval(()=>setBusyIdx(p=>(p+1)%busyWords.length),633);
     return()=>clearInterval(id);
   },[busyPaused,busyWords.length]);
 
