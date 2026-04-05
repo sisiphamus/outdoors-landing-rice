@@ -24,7 +24,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-i
 .msg-hdr{display:flex;flex-direction:column;align-items:center;gap:3px;padding:2px 12px 7px;background:#F2F2F7;border-bottom:.5px solid rgba(0,0,0,.1);flex-shrink:0;position:relative}.msg-back{position:absolute;left:16px;color:#007AFF;font-size:17px;line-height:1}.msg-av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#5AC8FA,#007AFF);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff}.msg-name{font-size:10px;font-weight:600;color:#000}
 .msgs{flex:1;padding:5px 10px 6px;display:flex;flex-direction:column;gap:3px;overflow-y:auto;background:#fff;scrollbar-width:none}.msgs::-webkit-scrollbar{display:none}.m{max-width:80%;padding:6px 10px;border-radius:16px;font-size:12px;line-height:1.35;letter-spacing:-.01em;margin-bottom:1px;flex-shrink:0;opacity:1;transform:none}.m.o{align-self:flex-end;background:#007AFF;color:#fff;border-radius:16px 16px 4px 16px}.m.i{align-self:flex-start;background:#E9E9EB;color:#000;border-radius:16px 16px 16px 4px}.m.v{animation:bub .3s ease forwards}.mt{text-align:center;font-size:8px;color:#8E8E93;padding:3px 0;flex-shrink:0}.md{text-align:right;font-size:8px;color:#8E8E93;padding:1px 4px 3px;flex-shrink:0}
 .msg-in{display:flex;align-items:center;gap:5px;padding:5px 9px 16px;background:#F2F2F7;border-top:.5px solid rgba(0,0,0,.08);flex-shrink:0}.msg-field{flex:1;background:#fff;border-radius:16px;padding:6px 12px;font-size:11px;color:#C7C7CC;border:.5px solid rgba(0,0,0,.1)}.msg-send{width:22px;height:22px;border-radius:50%;background:#007AFF;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;flex-shrink:0}.ios-home-i{display:flex;justify-content:center;padding:3px 0 2px;background:#F2F2F7;flex-shrink:0}.ios-home-bar{width:100px;height:4px;background:rgba(0,0,0,.12);border-radius:2px}@keyframes bub{to{opacity:1;transform:translateY(0)}}
-.tool-strip{padding:40px 0 0;overflow:hidden;position:relative}.tool-strip-inner{display:flex;align-items:center;gap:clamp(28px,5vw,56px);width:max-content;animation:marquee 30s linear infinite;will-change:transform}.tool-strip-inner:hover{animation-play-state:paused}@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(calc(-50% - clamp(14px,2.5vw,28px)))}}.tool-icon{height:28px;width:auto;flex-shrink:0;opacity:.5;transition:opacity .2s,transform .2s}.tool-icon:hover{opacity:.85;transform:scale(1.1)}
+.tool-strip{padding:40px 0 0;overflow:hidden}.tool-track{display:flex;width:max-content;will-change:transform}.tool-track:hover{animation-play-state:paused}.tool-set{display:flex;align-items:center;gap:48px;padding-right:48px;flex-shrink:0}.tool-icon{height:28px;width:auto;flex-shrink:0;opacity:.5;transition:opacity .2s,transform .2s}.tool-icon:hover{opacity:.85;transform:scale(1.1)}
 .proof{padding:28px 24px;text-align:center;border-bottom:1px solid var(--border)}.proof-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:clamp(20px,4vw,48px);flex-wrap:wrap}.proof-item{display:flex;align-items:center;gap:8px}.proof-logo{height:22px;opacity:.5;transition:opacity .2s}.proof-logo:hover{opacity:.7}
 .lbl{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}.sec-hd{text-align:center;margin-bottom:36px}.sec-hd h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.2vw,2.6rem);font-weight:400;letter-spacing:-.03em;text-wrap:balance}
 .manifesto{padding:clamp(80px,14vw,160px) 24px;text-align:center;background:var(--text-1);color:var(--bg)}.manifesto-inner{max-width:820px;margin:0 auto}.manifesto p{font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,3.2rem);line-height:1.25;color:var(--bg);margin-bottom:16px;letter-spacing:-.03em}.manifesto p span{color:#8ab98a;font-style:italic}
@@ -35,8 +35,8 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-i
 footer{padding:28px 24px;border-top:1px solid var(--border)}.fi{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center}.fl{display:flex;gap:24px;list-style:none}.fl a{font-size:.8rem;color:var(--text-3);text-decoration:none;padding-bottom:3px;background-image:linear-gradient(var(--accent),var(--accent));background-size:0% 1.5px;background-position:0% 100%;background-repeat:no-repeat;transition:background-size .3s var(--ease),color .2s var(--ease)}.fl a:hover{color:var(--text-1);background-size:100% 1.5px}.fn{font-size:.72rem;color:var(--text-3)}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease),transform .5s var(--ease)}.rv.show{opacity:1;transform:none}
 @media(max-width:860px){.hero h1{font-size:clamp(2rem,7vw,3rem)}.steps-row{grid-template-columns:repeat(2,1fr)}.si:first-child{border-radius:14px 0 0 0}.si:nth-child(2){border-radius:0 14px 0 0}.si:nth-child(3){border-radius:0 0 0 14px}.si:last-child{border-radius:0 0 14px 0}.caps-grid{grid-template-columns:1fr}.cap:nth-child(n){grid-column:span 1}.iphone{width:230px;height:500px}}
-@media(max-width:540px){.steps-row{grid-template-columns:1fr}.si{border-radius:0!important}.si:first-child{border-radius:14px 14px 0 0!important}.si:last-child{border-radius:0 0 14px 14px!important}.proof-inner{flex-direction:column;gap:12px}.fi{flex-direction:column;gap:14px;text-align:center}.fl{flex-wrap:wrap;justify-content:center}.tool-strip-inner{gap:20px}.tool-icon{height:22px}.hero-benefits{margin-left:auto;margin-right:auto;max-width:340px}}
-@media(prefers-reduced-motion:reduce){*{transition-duration:0ms!important;animation-duration:0ms!important}.rv{opacity:1;transform:none}.hero-word{opacity:1;transform:none}.tool-strip-inner{animation:none}}
+@media(max-width:540px){.steps-row{grid-template-columns:1fr}.si{border-radius:0!important}.si:first-child{border-radius:14px 14px 0 0!important}.si:last-child{border-radius:0 0 14px 14px!important}.proof-inner{flex-direction:column;gap:12px}.fi{flex-direction:column;gap:14px;text-align:center}.fl{flex-wrap:wrap;justify-content:center}.tool-set{gap:20px;padding-right:20px}.tool-icon{height:22px}.hero-benefits{margin-left:auto;margin-right:auto;max-width:340px}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:0ms!important;animation-duration:0ms!important}.rv{opacity:1;transform:none}.hero-word{opacity:1;transform:none}.tool-track{animation:none!important}}
 `;
 
 const REPO="sisiphamus/Outdoors";
@@ -131,6 +131,19 @@ export default function Home(){
   useEffect(()=>{const obs=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add("show")}),{threshold:0,rootMargin:"0px 0px 120px 0px"});document.querySelectorAll(".rv").forEach(el=>obs.observe(el));return()=>obs.disconnect()},[]);
   useEffect(()=>{const t=setTimeout(()=>{const ms=document.getElementById("waChat");if(!ms)return;const bs=ms.querySelectorAll(".m");if(bs[0]?.classList.contains("v"))return;bs.forEach((b,i)=>{setTimeout(()=>{b.classList.add("v");ms.scrollTop=ms.scrollHeight},i*400)})},300);return()=>clearTimeout(t)},[]);
 
+  // Tool marquee — measure first set width and animate by exact pixels
+  useEffect(()=>{
+    const track=document.querySelector(".tool-track") as HTMLElement|null;
+    const firstSet=document.querySelector(".tool-set") as HTMLElement|null;
+    if(!track||!firstSet)return;
+    const w=firstSet.offsetWidth;
+    const style=document.createElement("style");
+    style.textContent=`@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-${w}px)}}`;
+    document.head.appendChild(style);
+    track.style.animation="marquee 25s linear infinite";
+    return()=>{style.remove()};
+  },[]);
+
   // Nav scroll progress bar
   useEffect(()=>{
     const bar=document.getElementById("nav-progress");
@@ -153,8 +166,7 @@ export default function Home(){
     {lbl:"Files",t:"Organized in minutes",d:"Organize Drive folders for classes, research, and recruiting instantly."},
   ];
 
-  // Duplicate tools array for seamless marquee
-  const marqueeTools=[...tools,...tools];
+  const toolSet=tools.map((t,i)=><img key={i} className="tool-icon" src={t.src} alt={t.name} title={t.name}/>);
 
   return(<><style dangerouslySetInnerHTML={{__html:css}}/>
   <nav id="nav"><a href="#" className="logo">Outdoors.rice</a><a href={DL_URLS[os]} className="btn-primary" style={{padding:"9px 22px",fontSize:".84rem"}}>Download</a><div id="nav-progress"/></nav>
@@ -169,7 +181,7 @@ export default function Home(){
     <div className="hero-ctas"><a href="sms:8032920205" className="btn-phone">Talk to us: (803) 292-0205</a><a href="#steps" className="btn-text">How it works</a></div>
   </section>
   <div className="phone-wrap"><div className="iphone"><div className="iphone-screen"><div className="di"/><div className="ios-bar"><div className="ios-time">9:15</div><div className="ios-icons"><div className="ios-sig"><span/><span/><span/><span/></div><div className="ios-bt"><div className="ios-bt-b"><div className="ios-bt-f"/></div><div className="ios-bt-t"/></div></div></div><div className="msg-hdr"><span className="msg-back">&lsaquo;</span><div className="msg-av">O</div><div className="msg-name">Outdoors</div></div><div className="msgs" id="waChat"><div className="mt">Today 9:14 AM</div><div className="m o">Email the team I{"'"}ll be 15 min late. Keep it casual.</div><div className="md">Delivered</div><div className="m i">Done. Sent from your Gmail: {"\u201c"}Running ~15 min behind. Start without me.{"\u201d"}</div><div className="m o">Compile all my performative pictures into a file and use them to create a Hinge account.</div><div className="mt">Read 9:14 AM</div><div className="m i">Done. Photos are organized and a Hinge profile draft is ready for review.</div><div className="m o">Build me a landing page.</div><div className="mt">Read 9:15 AM</div><div className="m i">You{"'"}re looking at it.</div></div><div className="msg-in"><div className="msg-field">Message</div><div className="msg-send">+</div></div><div className="ios-home-i"><div className="ios-home-bar"/></div></div></div></div>
-  <div className="tool-strip"><div className="tool-strip-inner">{marqueeTools.map((t,i)=><img key={`${t.name}-${i}`} className="tool-icon" src={t.src} alt={t.name} title={t.name}/>)}</div></div>
+  <div className="tool-strip"><div className="tool-track"><div className="tool-set">{toolSet}</div><div className="tool-set">{tools.map((t,i)=><img key={`dup-${i}`} className="tool-icon" src={t.src} alt={t.name} title={t.name}/>)}</div></div></div>
   <div className="proof"><div className="proof-inner"><div className="proof-item"><img className="proof-logo" src="/logos/rice.svg" alt="Rice University"/></div></div></div>
   <section className="manifesto rv"><div className="manifesto-inner"><p>The students who win are the ones who <span>automate the busywork.</span></p></div></section>
   <section className="steps" id="steps"><div className="steps-inner"><div className="sec-hd rv"><div className="lbl">How it works</div><h2>You shouldn{"'"}t have to do work a machine can do.</h2></div><div className="steps-row">{steps.map((s,i)=><div key={s.l} className="si rv" style={{transitionDelay:`${i*50}ms`}}><div className="si-n">0{i+1}</div><div className="si-t">{s.l}</div><p className="si-d">{s.d}</p></div>)}</div></div></section>
