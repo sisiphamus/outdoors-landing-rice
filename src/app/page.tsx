@@ -74,7 +74,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .cap:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}.cap:active{transform:translateY(0) scale(.988);transition-duration:80ms}
 .cap:nth-child(1){grid-column:span 3}.cap:nth-child(2){grid-column:span 3}.cap:nth-child(3){grid-column:span 2}.cap:nth-child(4){grid-column:span 2}.cap:nth-child(5){grid-column:span 2}.cap:nth-child(6){grid-column:span 3}.cap:nth-child(7){grid-column:span 3}
 .cap{background:rgba(248,247,244,.78);background-image:linear-gradient(145deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.04) 60%,rgba(61,107,61,.02) 100%)}
-.cap-lbl{font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}.cap-title{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:var(--text-1)}
+.cap-icon{height:24px;width:auto;margin-bottom:10px;opacity:.8}.cap-title{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:var(--text-1)}
 
 /* ── CTA FINAL ── */
 .cta-final{padding:clamp(72px,12vw,120px) 24px;text-align:center}.cta-final h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:400;letter-spacing:-.02em;margin-bottom:8px;text-wrap:balance;color:var(--text-1)}.cta-final>p{color:var(--text-2);font-size:.95rem;margin-bottom:28px;line-height:1.6}
@@ -215,13 +215,13 @@ export default function Home(){
     {l:"Get Outdoors",d:"",img:true},
   ];
   const caps=[
-    {lbl:"Email",t:"Your Rice Gmail, handled"},
-    {lbl:"Calendar",t:"No conflicts, ever"},
-    {lbl:"Docs",t:"Notes to polished docs"},
-    {lbl:"Sheets",t:"Auto-tracked everything"},
-    {lbl:"Messaging",t:"Follow-ups on autopilot"},
-    {lbl:"Files",t:"Organized in minutes"},
-    {lbl:"Research",t:"Deep dives, done fast"},
+    {lbl:"Email",t:"Your Rice Gmail, handled",icon:"/logos/gmail.svg"},
+    {lbl:"Calendar",t:"No conflicts, ever",icon:"/logos/gcal.svg"},
+    {lbl:"Docs",t:"Notes to polished docs",icon:"/logos/gdocs.svg"},
+    {lbl:"Sheets",t:"Auto-tracked everything",icon:"/logos/gsheets.svg"},
+    {lbl:"Messaging",t:"Follow-ups on autopilot",icon:"/logos/slack.svg"},
+    {lbl:"Files",t:"Organized in minutes",icon:"/logos/gdrive.svg"},
+    {lbl:"Research",t:"Deep dives, done fast",icon:"/logos/notion.svg"},
   ];
 
   const toolsX4=[...tools,...tools,...tools,...tools];
@@ -251,7 +251,7 @@ export default function Home(){
 
   <section className="steps" id="steps"><div className="steps-inner"><div className="sec-hd rv"><div className="lbl">How it works</div><h2>You shouldn{"'"}t have to do work a machine can do.</h2></div><div className="steps-row">{steps.map((s,i)=><div key={s.l} className={`si rv${(s as any).img?" si-img":""}`} style={{transitionDelay:`${i*80}ms`,...((s as any).img?{backgroundImage:"url(/images/xp-bliss.jpg)",backgroundSize:"cover",backgroundPosition:"center"}:{})}}><div className="si-n">0{i+1}</div><div className="si-t">{s.l}</div>{s.d&&<p className="si-d">{s.d}</p>}</div>)}</div></div></section>
 
-  <section className="caps"><div className="caps-inner"><div className="sec-hd rv"><div className="lbl">What it does</div><h2>Rice workflows you spend hours on. Handled.</h2></div><div className="caps-grid">{caps.map((c,i)=><div key={c.lbl} className="cap rv" style={{transitionDelay:`${i*60}ms`}}><div className="cap-lbl">{c.lbl}</div><div className="cap-title">{c.t}</div></div>)}</div></div></section>
+  <section className="caps"><div className="caps-inner"><div className="sec-hd rv"><div className="lbl">What it does</div><h2>You can automate it all, including emailing a clean email to your prof from your bed that you are indeed: sick</h2></div><div className="caps-grid">{caps.map((c,i)=><div key={c.lbl} className="cap rv" style={{transitionDelay:`${i*60}ms`}}><img className="cap-icon" src={c.icon} alt={c.lbl}/><div className="cap-title">{c.t}</div></div>)}</div></div></section>
 
   <section className="cta-final rv" id="download"><h2>Ready to get Outdoors?</h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><a href={DL_URLS[os]} className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}}>Download for {OS_LABELS[os]}</a></div><div className="dl-alt">{(Object.keys(DL_URLS) as OS[]).filter(k=>k!==os).map(k=><a key={k} href={DL_URLS[k]}>{OS_LABELS[k]}</a>)}</div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us ·that{"'"}s a real person.</p></div></section>
 
