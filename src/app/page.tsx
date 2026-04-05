@@ -71,8 +71,9 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .cap{padding:28px 24px;border-radius:20px;position:relative;overflow:hidden;isolation:isolate;backdrop-filter:blur(20px) saturate(1.6) brightness(1.04);-webkit-backdrop-filter:blur(20px) saturate(1.6) brightness(1.04);border:1px solid var(--border);box-shadow:var(--shadow-1);transition:transform .25s var(--snappy),box-shadow .25s var(--snappy),background-color .25s var(--snappy)}
 .cap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.7) 30%,rgba(255,255,255,.7) 70%,rgba(255,255,255,0) 100%);pointer-events:none}
 .cap:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}.cap:active{transform:translateY(0) scale(.988);transition-duration:80ms}
-.cap:nth-child(1){grid-column:span 3;background:rgba(61,107,61,.04)}.cap:nth-child(2){grid-column:span 3;background:rgba(61,107,61,.06)}.cap:nth-child(3){grid-column:span 2;background:rgba(61,107,61,.08)}.cap:nth-child(4){grid-column:span 2;background:rgba(61,107,61,.05)}.cap:nth-child(5){grid-column:span 2;background:rgba(61,107,61,.07)}.cap:nth-child(6){grid-column:span 3;background:rgba(61,107,61,.09)}.cap:nth-child(7){grid-column:span 3;background:rgba(61,107,61,.06)}
-.cap-lbl{font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}.cap-title{font-family:var(--font-display);font-size:1.1rem;font-weight:400;margin-bottom:6px;color:var(--text-1)}.cap-desc{font-size:.82rem;line-height:1.55;color:var(--text-2)}
+.cap:nth-child(1){grid-column:span 3}.cap:nth-child(2){grid-column:span 3}.cap:nth-child(3){grid-column:span 2}.cap:nth-child(4){grid-column:span 2}.cap:nth-child(5){grid-column:span 2}.cap:nth-child(6){grid-column:span 3}.cap:nth-child(7){grid-column:span 3}
+.cap{background:rgba(248,247,244,.78);background-image:linear-gradient(145deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.04) 60%,rgba(61,107,61,.02) 100%)}
+.cap-lbl{font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}.cap-title{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:var(--text-1)}
 
 /* ── CTA FINAL ── */
 .cta-final{padding:clamp(72px,12vw,120px) 24px;text-align:center}.cta-final h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:400;letter-spacing:-.02em;margin-bottom:8px;text-wrap:balance;color:var(--text-1)}.cta-final>p{color:var(--text-2);font-size:.95rem;margin-bottom:28px;line-height:1.6}
@@ -86,8 +87,8 @@ footer{padding:24px 24px;border-top:1px solid rgba(0,0,0,.04)}.fi{max-width:var(
 .rv{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}.rv.show{opacity:1;transform:none}
 
 /* ── RESPONSIVE ── */
-@media(max-width:860px){.hero h1{font-size:clamp(2rem,7vw,3rem)}.steps-row{grid-template-columns:repeat(2,1fr)}.caps-grid{grid-template-columns:1fr}.cap:nth-child(n){grid-column:span 1}.iphone{width:230px;height:500px}nav{width:min(95%,500px)}}
-@media(max-width:540px){.steps-row{grid-template-columns:1fr}.proof-inner{flex-direction:column;gap:12px}.fi{flex-direction:column;gap:14px;text-align:center}.fl{flex-wrap:wrap;justify-content:center}.tool-set{gap:24px;padding-right:24px}.tool-icon{height:22px}.hero-benefits{max-width:340px;margin-left:auto;margin-right:auto}nav{top:8px;width:min(96%,400px);padding:0 16px;height:48px}.logo{font-size:1.2rem}}
+@media(max-width:860px){.hero h1{font-size:clamp(2.4rem,8vw,3.4rem)}.steps-row{grid-template-columns:repeat(2,1fr)}.caps-grid{grid-template-columns:repeat(2,1fr)}.cap:nth-child(n){grid-column:span 1}.cap:nth-child(7){grid-column:span 2}.iphone{width:230px;height:500px}nav{width:min(95%,500px)}}
+@media(max-width:540px){.hero h1{font-size:clamp(2.2rem,9vw,3rem);letter-spacing:-.04em}.steps-row{grid-template-columns:1fr}.caps-grid{grid-template-columns:repeat(2,1fr);gap:8px}.cap{padding:20px 16px;border-radius:16px}.cap-title{font-size:1rem}.proof-inner{flex-direction:column;gap:12px}.fi{flex-direction:column;gap:14px;text-align:center}.fl{flex-wrap:wrap;justify-content:center}.tool-set{gap:24px;padding-right:24px}.tool-icon{height:22px}.hero-benefits{max-width:340px;margin-left:auto;margin-right:auto}nav{top:8px;width:min(96%,400px);padding:0 16px;height:48px}.logo{font-size:1.2rem}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:0ms!important;animation-duration:0ms!important}.rv{opacity:1;transform:none}.hero-word{opacity:1;transform:none}.tool-track{animation:none!important}}
 @supports not(backdrop-filter:blur(1px)){.si,.cap,.manifesto-glass,nav{background:rgba(240,244,240,.96)!important;border:1px solid rgba(61,107,61,.15)!important;backdrop-filter:none!important}}
 `;
@@ -213,13 +214,13 @@ export default function Home(){
     {l:"Done",d:"Finished before your next class starts."},
   ];
   const caps=[
-    {lbl:"Email",t:"Your Rice Gmail, handled",d:"Draft and send emails to professors, TAs, labs, and club officers. You dictate, it writes and sends."},
-    {lbl:"Calendar",t:"No conflicts",d:"Plan classes, labs, office hours, and org meetings automatically."},
-    {lbl:"Docs",t:"Notes to polished docs",d:"Turn rough notes into briefs, scholarship essays, and student org docs."},
-    {lbl:"Sheets",t:"Auto-tracked",d:"Track applications, budgets, and recruiting lists in Sheets automatically."},
-    {lbl:"Messaging",t:"Follow-ups on autopilot",d:"Send follow-ups and status updates without manually typing every message."},
-    {lbl:"Files",t:"Organized in minutes",d:"Organize Drive folders for classes, research, and recruiting instantly."},
-    {lbl:"Research",t:"Deep dives, done fast",d:"Pull sources, summarize papers, and compile citations for any assignment."},
+    {lbl:"Email",t:"Your Rice Gmail, handled"},
+    {lbl:"Calendar",t:"No conflicts, ever"},
+    {lbl:"Docs",t:"Notes to polished docs"},
+    {lbl:"Sheets",t:"Auto-tracked everything"},
+    {lbl:"Messaging",t:"Follow-ups on autopilot"},
+    {lbl:"Files",t:"Organized in minutes"},
+    {lbl:"Research",t:"Deep dives, done fast"},
   ];
 
   const toolsX4=[...tools,...tools,...tools,...tools];
@@ -249,7 +250,7 @@ export default function Home(){
 
   <section className="steps" id="steps"><div className="steps-inner"><div className="sec-hd rv"><div className="lbl">How it works</div><h2>You shouldn{"'"}t have to do work a machine can do.</h2></div><div className="steps-row">{steps.map((s,i)=><div key={s.l} className="si rv" style={{transitionDelay:`${i*80}ms`}}><div className="si-n">0{i+1}</div><div className="si-t">{s.l}</div><p className="si-d">{s.d}</p></div>)}</div></div></section>
 
-  <section className="caps"><div className="caps-inner"><div className="sec-hd rv"><div className="lbl">What it does</div><h2>Rice workflows you spend hours on. Handled.</h2></div><div className="caps-grid">{caps.map((c,i)=><div key={c.lbl} className="cap rv" style={{transitionDelay:`${i*60}ms`}}><div className="cap-lbl">{c.lbl}</div><div className="cap-title">{c.t}</div><p className="cap-desc">{c.d}</p></div>)}</div></div></section>
+  <section className="caps"><div className="caps-inner"><div className="sec-hd rv"><div className="lbl">What it does</div><h2>Rice workflows you spend hours on. Handled.</h2></div><div className="caps-grid">{caps.map((c,i)=><div key={c.lbl} className="cap rv" style={{transitionDelay:`${i*60}ms`}}><div className="cap-lbl">{c.lbl}</div><div className="cap-title">{c.t}</div></div>)}</div></div></section>
 
   <section className="cta-final rv" id="download"><h2>Ready to get Outdoors?</h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><a href={DL_URLS[os]} className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}}>Download for {OS_LABELS[os]}</a></div><div className="dl-alt">{(Object.keys(DL_URLS) as OS[]).filter(k=>k!==os).map(k=><a key={k} href={DL_URLS[k]}>{OS_LABELS[k]}</a>)}</div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us — that{"'"}s a real person.</p></div></section>
 
