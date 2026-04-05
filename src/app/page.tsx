@@ -54,7 +54,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .manifesto-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(100,160,100,.08) 0%,rgba(100,160,100,0) 30%);pointer-events:none}
 .manifesto-glass p{font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,3.2rem);line-height:1.25;color:rgba(255,255,255,.92);letter-spacing:-.03em;text-shadow:0 1px 4px rgba(0,0,0,.25);position:relative;z-index:1}
 .manifesto-glass p span{color:#8ab98a;font-style:italic}
-.busy-rotate{display:inline-block;width:clamp(200px,26vw,360px);text-align:left;cursor:default;vertical-align:bottom;height:1.35em}.busy-word{display:inline-block;animation:busyIn .25s var(--ease) both}@keyframes busyIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.busy-rotate{display:inline-block;width:clamp(200px,26vw,360px);text-align:left;cursor:default;vertical-align:baseline;height:1.3em}.busy-word{display:inline-block;animation:busyIn .25s var(--ease) both}@keyframes busyIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 /* ── STEPS: glass cards ── */
 .steps{padding:clamp(72px,10vw,110px) 24px}.steps-inner{max-width:var(--max-w);margin:0 auto}
@@ -64,6 +64,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .si:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);background-color:rgba(255,255,255,.8)}
 .si:active{transform:translateY(0) scale(.988);transition-duration:80ms}
 .si-n{font-family:var(--font-display);font-size:clamp(4.5rem,10vw,7rem);color:var(--accent);opacity:.1;line-height:.85;letter-spacing:-.05em;margin-bottom:8px}.si-t{font-weight:600;font-size:.95rem;color:var(--text-1);margin-bottom:6px;position:relative}.si-d{font-size:.84rem;line-height:1.55;color:var(--text-2);position:relative}
+.si-img{background-size:cover!important;background-position:center!important;min-height:180px}.si-img .si-n{color:#fff;opacity:.2;text-shadow:0 2px 8px rgba(0,0,0,.3)}.si-img .si-t{color:#fff;font-size:1.1rem;text-shadow:0 1px 6px rgba(0,0,0,.4)}.si-img::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.35) 100%);pointer-events:none}
 
 /* ── CAPABILITIES: glass bento ── */
 .caps{padding:clamp(72px,10vw,110px) 24px}.caps-inner{max-width:var(--max-w);margin:0 auto}
@@ -208,10 +209,10 @@ export default function Home(){
   const words=headline.split(" ");
 
   const steps=[
-    {l:"Text it",d:"Tell Outdoors what you need — Canvas, Handshake, ESTHER, or email."},
-    {l:"It takes over",d:"It opens your real accounts and handles the clicks."},
-    {l:"It does the work",d:"Submits assignments, sends outreach, updates docs."},
+    {l:"Text It",d:"\"Tell me what assignments are due\""},
+    {l:"It takes over",d:"It uses your computer while you're away."},
     {l:"Done",d:"Finished before your next class starts."},
+    {l:"Get Outdoors",d:"",img:true},
   ];
   const caps=[
     {lbl:"Email",t:"Your Rice Gmail, handled"},
@@ -228,7 +229,7 @@ export default function Home(){
   return(<><style dangerouslySetInnerHTML={{__html:css}}/>
   <nav id="nav"><a href="#" className="logo" style={{display:"flex",alignItems:"center",gap:"8px"}}><img src="/logo-outdoors.svg" alt="Outdoors" style={{height:"28px",width:"auto"}}/><span>Outdoors.rice</span></a><a href={DL_URLS[os]} className="btn-primary">Download</a><div id="nav-progress"/></nav>
 
-  <div className="counter-bar">{taskCount>0&&<>Free for .edu<span className={`counter-num${bump?" counter-bump":""}`}> — {taskCount.toLocaleString()}</span> tasks completed</>}</div>
+  <div className="counter-bar">{taskCount>0&&<>Free for .edu<span className={`counter-num${bump?" counter-bump":""}`}> ·{taskCount.toLocaleString()}</span> tasks completed</>}</div>
 
   <section className="hero">
     <h1>{words.map((w,i)=><span key={i} className="hero-word" style={{animationDelay:`${i*60}ms`,marginRight:i<words.length-1?".3em":0}}>{w}</span>)}</h1>
@@ -248,11 +249,11 @@ export default function Home(){
 
   <section className="manifesto rv"><div className="manifesto-glass"><p>You didn{"'"}t come to Rice to do <span className="busy-rotate" onMouseEnter={()=>setBusyPaused(true)} onMouseLeave={()=>setBusyPaused(false)}><span className="busy-word" key={busyIdx}>{busyWords[busyIdx]}</span></span></p></div></section>
 
-  <section className="steps" id="steps"><div className="steps-inner"><div className="sec-hd rv"><div className="lbl">How it works</div><h2>You shouldn{"'"}t have to do work a machine can do.</h2></div><div className="steps-row">{steps.map((s,i)=><div key={s.l} className="si rv" style={{transitionDelay:`${i*80}ms`}}><div className="si-n">0{i+1}</div><div className="si-t">{s.l}</div><p className="si-d">{s.d}</p></div>)}</div></div></section>
+  <section className="steps" id="steps"><div className="steps-inner"><div className="sec-hd rv"><div className="lbl">How it works</div><h2>You shouldn{"'"}t have to do work a machine can do.</h2></div><div className="steps-row">{steps.map((s,i)=><div key={s.l} className={`si rv${(s as any).img?" si-img":""}`} style={{transitionDelay:`${i*80}ms`,...((s as any).img?{backgroundImage:"url(/images/xp-bliss.jpg)",backgroundSize:"cover",backgroundPosition:"center"}:{})}}><div className="si-n">0{i+1}</div><div className="si-t">{s.l}</div>{s.d&&<p className="si-d">{s.d}</p>}</div>)}</div></div></section>
 
   <section className="caps"><div className="caps-inner"><div className="sec-hd rv"><div className="lbl">What it does</div><h2>Rice workflows you spend hours on. Handled.</h2></div><div className="caps-grid">{caps.map((c,i)=><div key={c.lbl} className="cap rv" style={{transitionDelay:`${i*60}ms`}}><div className="cap-lbl">{c.lbl}</div><div className="cap-title">{c.t}</div></div>)}</div></div></section>
 
-  <section className="cta-final rv" id="download"><h2>Ready to get Outdoors?</h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><a href={DL_URLS[os]} className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}}>Download for {OS_LABELS[os]}</a></div><div className="dl-alt">{(Object.keys(DL_URLS) as OS[]).filter(k=>k!==os).map(k=><a key={k} href={DL_URLS[k]}>{OS_LABELS[k]}</a>)}</div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us — that{"'"}s a real person.</p></div></section>
+  <section className="cta-final rv" id="download"><h2>Ready to get Outdoors?</h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><a href={DL_URLS[os]} className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}}>Download for {OS_LABELS[os]}</a></div><div className="dl-alt">{(Object.keys(DL_URLS) as OS[]).filter(k=>k!==os).map(k=><a key={k} href={DL_URLS[k]}>{OS_LABELS[k]}</a>)}</div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us ·that{"'"}s a real person.</p></div></section>
 
   <footer><div className="fi"><span className="logo" style={{fontSize:"1.1rem"}}>outdoors</span><ul className="fl"><li><a href="#steps">Product</a></li><li><a href="#download">Download</a></li></ul><span className="fn">Built at Rice University</span></div></footer>
   </>)
