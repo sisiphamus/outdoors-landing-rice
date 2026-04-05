@@ -18,7 +18,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .dl-alt{display:flex;gap:16px;justify-content:center;margin-top:14px;flex-wrap:wrap}.dl-alt a{font-size:.84rem;color:var(--text-2);text-decoration:none;padding-bottom:3px;background-image:linear-gradient(var(--accent),var(--accent));background-size:0% 1.5px;background-position:0% 100%;background-repeat:no-repeat;transition:background-size .3s var(--ease),color .2s var(--ease)}.dl-alt a:hover{color:var(--accent);background-size:100% 1.5px}
 
 /* ── COUNTER BAR ── */
-.counter-bar{padding:8px 24px;text-align:center;font-size:.78rem;font-weight:500;letter-spacing:.02em;color:var(--text-2);margin-top:calc(var(--nav-h) + 28px)}.counter-num{font-family:var(--font-display);font-size:.95rem;font-weight:400;color:var(--accent);display:inline-block;min-width:40px;transition:transform .2s var(--ease)}.counter-bump{animation:cb .3s var(--ease)}@keyframes cb{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+.counter-bar{padding:6px 24px;text-align:center;font-size:.72rem;font-weight:400;letter-spacing:.04em;color:var(--text-3);margin-top:calc(var(--nav-h) + 28px)}.counter-num{font-family:var(--font-body);font-size:.72rem;font-weight:500;font-variant-numeric:tabular-nums;color:var(--accent);display:inline-block;min-width:30px;transition:transform .2s var(--ease)}.counter-bump{animation:cb .3s var(--ease)}@keyframes cb{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
 
 /* ── HERO ── */
 .hero{text-align:center;padding:20px 24px 40px}.hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,6.5vw,4.8rem);font-weight:400;line-height:1.12;letter-spacing:-.03em;max-width:780px;margin:0 auto 32px;text-wrap:balance}.hero h1 em{font-style:italic;color:var(--accent)}
@@ -67,7 +67,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .si-img{background-size:cover!important;background-position:center!important;min-height:180px}.si-img .si-n{color:#000;opacity:.2;text-shadow:none}.si-img .si-t{color:#fff;font-size:1.1rem;text-shadow:0 1px 6px rgba(0,0,0,.4)}.si-img::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.35) 100%);pointer-events:none}
 
 /* ── CAPABILITIES: glass bento ── */
-.caps{padding:clamp(72px,10vw,110px) 24px}.caps-inner{max-width:var(--max-w);margin:0 auto}
+.caps{padding:clamp(72px,10vw,110px) 24px clamp(40px,6vw,64px)}.caps-inner{max-width:var(--max-w);margin:0 auto}
 .caps-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
 .cap{padding:28px 24px;border-radius:20px;position:relative;overflow:hidden;isolation:isolate;backdrop-filter:blur(20px) saturate(1.6) brightness(1.04);-webkit-backdrop-filter:blur(20px) saturate(1.6) brightness(1.04);border:1px solid var(--border);box-shadow:var(--shadow-1);transition:transform .25s var(--snappy),box-shadow .25s var(--snappy),background-color .25s var(--snappy)}
 .cap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.7) 30%,rgba(255,255,255,.7) 70%,rgba(255,255,255,0) 100%);pointer-events:none}
@@ -77,7 +77,8 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .cap-icon{height:24px;width:auto;margin-bottom:10px;opacity:.8}.cap-title{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:var(--text-1)}
 
 /* ── CTA FINAL ── */
-.cta-final{padding:clamp(72px,12vw,120px) 24px;text-align:center}.cta-final h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:400;letter-spacing:-.02em;margin-bottom:8px;text-wrap:balance;color:var(--text-1)}.cta-final>p{color:var(--text-2);font-size:.95rem;margin-bottom:28px;line-height:1.6}
+.cta-final{padding:clamp(48px,8vw,80px) 24px;text-align:center}.cta-final h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;letter-spacing:-.03em;margin-bottom:8px;text-wrap:balance;color:var(--text-1);line-height:1.2}.cta-final>p{color:var(--text-2);font-size:.95rem;margin-bottom:28px;line-height:1.6}
+.nature-word{display:inline-block;width:clamp(100px,14vw,180px);height:clamp(1.8rem,4vw,3rem);border-radius:clamp(6px,1vw,10px);overflow:hidden;vertical-align:bottom;position:relative}.nature-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:natureIn .4s var(--ease) both}@keyframes natureIn{from{opacity:0;transform:scale(1.1)}to{opacity:1;transform:scale(1)}}
 .cta-final .limits{font-family:var(--font-display);font-size:clamp(1rem,1.8vw,1.25rem);color:var(--text-2);margin-bottom:32px;letter-spacing:-.01em}.cta-final .limits strong{color:var(--accent);font-weight:400}
 .cta-final .phone-big{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2.2rem);color:var(--accent);text-decoration:none;display:block;margin-bottom:8px;letter-spacing:-.01em;transition:opacity .2s}.cta-final .phone-big:hover{opacity:.7}.cta-final .phone-hint{font-size:.8rem;color:var(--text-3);margin-bottom:0}
 
@@ -158,6 +159,8 @@ export default function Home(){
   const[busyIdx,setBusyIdx]=useState(0);
   const[busyPaused,setBusyPaused]=useState(false);
   const[showDl,setShowDl]=useState(false);
+  const natureImgs=["/images/20251004_144654.webp","/images/20251015_205903.webp","/images/20251122_213844.webp","/images/20251127_083555.webp","/images/20251230_080722.webp","/images/xp-bliss.jpg"];
+  const[natureIdx,setNatureIdx]=useState(0);
 
   // Counter
   useEffect(()=>{
@@ -175,6 +178,12 @@ export default function Home(){
     const id=setInterval(()=>setBusyIdx(p=>(p+1)%busyWords.length),500);
     return()=>clearInterval(id);
   },[busyPaused,busyWords.length]);
+
+  // Nature image rotation
+  useEffect(()=>{
+    const id=setInterval(()=>setNatureIdx(p=>(p+1)%natureImgs.length),2000);
+    return()=>clearInterval(id);
+  },[natureImgs.length]);
 
   useEffect(()=>{
     if(!showDl)return;
@@ -232,13 +241,13 @@ export default function Home(){
     {l:"Get Outdoors",d:"",img:true},
   ];
   const caps=[
-    {lbl:"Email",t:"Your Rice Gmail, handled",icon:"/logos/gmail.svg"},
+    {lbl:"Email",t:"Email your prof you're sick. From bed. Convincingly.",icon:"/logos/gmail.svg"},
     {lbl:"Calendar",t:"Create, invite, make recurring, add Meet links...",icon:"/logos/gcal.svg"},
-    {lbl:"Docs",t:"Notes to polished docs",icon:"/logos/gdocs.svg"},
-    {lbl:"Sheets",t:"Auto-tracked everything",icon:"/logos/gsheets.svg"},
+    {lbl:"Canvas",t:"Check due dates, submit work, reply to discussions while you nap.",icon:"/logos/rice.svg"},
+    {lbl:"Sheets",t:"Track 47 internship apps without opening a single tab.",icon:"/logos/gsheets.svg"},
     {lbl:"Messaging",t:"Follow-ups on autopilot",icon:"/logos/slack.svg"},
-    {lbl:"Files",t:"Organized in minutes",icon:"/logos/gdrive.svg"},
-    {lbl:"Research",t:"Deep dives, done fast",icon:"/logos/notion.svg"},
+    {lbl:"Drive",t:"Find that one file from COMP 140 in 3 seconds flat.",icon:"/logos/gdrive.svg"},
+    {lbl:"Docs",t:"Turn your 2am brain dump into something a TA would grade well.",icon:"/logos/gdocs.svg"},
   ];
 
   const toolsX4=[...tools,...tools,...tools,...tools];
@@ -246,7 +255,7 @@ export default function Home(){
   return(<><style dangerouslySetInnerHTML={{__html:css}}/>
   <nav id="nav"><a href="#" className="logo" style={{display:"flex",alignItems:"center",gap:"8px"}}><img src="/logo-outdoors.svg" alt="Outdoors" style={{height:"28px",width:"auto"}}/><span>Outdoors.rice</span></a><button className="btn-primary" onClick={()=>setShowDl(true)}>Download</button><div id="nav-progress"/></nav>
 
-  <div className="counter-bar">{taskCount>0&&<>Free for .edu<span className={`counter-num${bump?" counter-bump":""}`}> ·{taskCount.toLocaleString()}</span> tasks completed</>}</div>
+  <div className="counter-bar">{taskCount>0&&<><span className={`counter-num${bump?" counter-bump":""}`}>{taskCount.toLocaleString()}</span> tasks completed · free for Rice students</>}</div>
 
   <section className="hero">
     <h1>{words.map((w,i)=><span key={i} className="hero-word" style={{animationDelay:`${i*60}ms`,marginRight:i<words.length-1?".3em":0}}>{w}</span>)}</h1>
@@ -270,7 +279,7 @@ export default function Home(){
 
   <section className="caps"><div className="caps-inner"><div className="sec-hd rv"><div className="lbl">What it does</div><h2>You can automate it all, including emailing a clean email to your prof from your bed that you are indeed: sick</h2></div><div className="caps-grid">{caps.map((c,i)=><div key={c.lbl} className="cap rv" style={{transitionDelay:`${i*60}ms`}}><img className="cap-icon" src={c.icon} alt={c.lbl}/><div className="cap-title">{c.t}</div></div>)}</div></div></section>
 
-  <section className="cta-final rv" id="download"><h2>Ready to get Outdoors?</h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><button className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}} onClick={()=>setShowDl(true)}>Download</button></div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us · that{"'"}s a real person.</p></div></section>
+  <section className="cta-final rv" id="download"><h2>Stop wasting time, get <span className="nature-word"><img key={natureIdx} className="nature-img" src={natureImgs[natureIdx]} alt="outdoors"/></span></h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><button className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}} onClick={()=>setShowDl(true)}>Download</button></div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us · that{"'"}s a real person.</p></div></section>
 
   {showDl&&<div className="dl-overlay" onClick={e=>{if(e.target===e.currentTarget)setShowDl(false)}}>
     <div className="dl-modal">
@@ -279,7 +288,7 @@ export default function Home(){
       <div className="dl-options">
         <a href={DL_URLS.win} className={`dl-opt${os==="win"?" active":""}`}><span className="dl-opt-icon">{"\uD83E\uDE9F"}</span><div className="dl-opt-info"><div className="dl-opt-name">Windows</div><div className="dl-opt-note">Download .exe installer</div></div></a>
         <a href={DL_URLS.mac} className={`dl-opt${os==="mac"?" active":""}`}><span className="dl-opt-icon">{"\uD83C\uDF4E"}</span><div className="dl-opt-info"><div className="dl-opt-name">macOS</div><div className="dl-opt-note">Download .dmg · read the README to install</div></div></a>
-        <a href={DL_URLS.linux} className={`dl-opt${os==="linux"?" active":""}`}><span className="dl-opt-icon">{"\uD83D\uDDA5\uFE0F"}</span><div className="dl-opt-info"><div className="dl-opt-name">Linux</div><div className="dl-opt-note">View releases on GitHub</div></div></a>
+        <a href={DL_URLS.linux} className={`dl-opt${os==="linux"?" active":""}`}><span className="dl-opt-icon">{"\uD83D\uDDA5\uFE0F"}</span><div className="dl-opt-info"><div className="dl-opt-name">Linux</div><div className="dl-opt-note">Download latest .AppImage or .deb</div></div></a>
       </div>
       <button className="dl-close" onClick={()=>setShowDl(false)}>Close</button>
     </div>
