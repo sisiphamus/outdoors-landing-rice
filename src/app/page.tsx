@@ -6,17 +6,7 @@ const css = `
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);background:var(--bg);color:var(--text-1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,40px);background:var(--nav-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:100;border-bottom:1px solid var(--border)}
 .logo{font-family:var(--font-display);font-size:clamp(1.5rem,2.4vw,2rem);color:var(--text-1);text-decoration:none}
-.waitlist-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200;animation:mb .25s ease}@keyframes mb{from{opacity:0}to{opacity:1}}
-.waitlist-modal{width:min(400px,100%);background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:36px 32px;box-shadow:0 20px 50px rgba(0,0,0,.2);text-align:center;animation:mi .3s var(--ease)}@keyframes mi{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-.waitlist-modal h3{font-family:var(--font-display);font-size:1.4rem;font-weight:400;margin-bottom:6px}
-.waitlist-modal p{font-size:.88rem;color:var(--text-2);margin-bottom:20px;line-height:1.5}
-.waitlist-form{display:flex;flex-direction:column;gap:8px}
-.waitlist-form input{padding:12px 16px;border:1px solid var(--border);border-radius:10px;background:var(--bg-alt);color:var(--text-1);font-family:var(--font-body);font-size:.9rem;outline:none}
-.waitlist-form input::placeholder{color:var(--text-3)}
-.waitlist-form input:focus{border-color:var(--accent)}
-.waitlist-form button{padding:12px;border-radius:10px;border:none;background:var(--cta-bg);color:var(--cta-fg);font-family:var(--font-body);font-size:.92rem;font-weight:600;cursor:pointer}
-.waitlist-close{margin-top:14px;background:none;border:none;color:var(--text-3);font-size:.82rem;cursor:pointer;font-family:var(--font-body)}.waitlist-close:hover{color:var(--text-1)}
-.waitlist-success{color:var(--accent);font-weight:600;font-size:.92rem;padding:16px 0}
+.dl-alt{display:flex;gap:16px;justify-content:center;margin-top:14px;flex-wrap:wrap}.dl-alt a{font-size:.84rem;color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:all .2s var(--ease)}.dl-alt a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .counter-bar{padding:10px 24px;text-align:center;background:var(--accent);color:var(--cta-fg);font-size:.82rem;font-weight:600;letter-spacing:.02em;position:fixed;top:var(--nav-h);left:0;right:0;z-index:99;animation:fu .5s var(--ease) .5s both}.counter-num{font-family:var(--font-display);font-size:1.05rem;font-weight:400;letter-spacing:.01em;display:inline-block;min-width:50px;transition:transform .2s var(--ease)}.counter-bump{animation:cb .3s var(--ease)}@keyframes cb{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
 .hero{text-align:center;padding:calc(var(--nav-h) + 110px) 24px 40px}.hero h1{font-family:var(--font-display);font-size:clamp(2.6rem,6vw,4.4rem);font-weight:400;line-height:1.08;letter-spacing:-.03em;max-width:740px;margin:0 auto 20px;text-wrap:balance;animation:fu .7s var(--ease) both}.hero h1 em{font-style:italic;color:var(--accent)}.hero-sub{font-size:clamp(.95rem,1.6vw,1.1rem);color:var(--text-2);max-width:520px;margin:0 auto 32px;line-height:1.6;animation:fu .7s var(--ease) .1s both}.hero-ctas{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:48px;animation:fu .7s var(--ease) .2s both}
 .btn-primary{display:inline-flex;align-items:center;padding:13px 30px;border-radius:99px;border:none;font-family:var(--font-body);font-size:.92rem;font-weight:600;background:var(--cta-bg);color:var(--cta-fg);cursor:pointer;text-decoration:none;transition:all .2s var(--ease)}.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
@@ -50,7 +40,12 @@ footer{padding:28px 24px;border-top:1px solid var(--border)}.fi{max-width:var(--
 @media(prefers-reduced-motion:reduce){*{transition-duration:0ms!important;animation-duration:0ms!important}.rv{opacity:1;transform:none}}
 `;
 
-const SU="https://script.google.com/macros/s/AKfycbwZZiYmxWfmUbsuJCYdxfEys8HihaCWUsw4r46OJ-DB1psv2kuqGWS2jeLfGpceZGcO/exec";
+const REPO="sisiphamus/Outdoors";
+const DL_BASE=`https://github.com/${REPO}/releases/latest/download`;
+const DL_URLS={mac:`${DL_BASE}/Outdoors.dmg`,win:`${DL_BASE}/Outdoors-Setup.exe`,linux:`https://github.com/${REPO}/releases/latest`} as const;
+type OS="mac"|"win"|"linux";
+function detectOS():OS{if(typeof navigator==="undefined")return"win";const ua=navigator.userAgent;if(/Mac|iPhone|iPad/.test(ua))return"mac";if(/Linux/.test(ua))return"linux";return"win";}
+const OS_LABELS:Record<OS,string>={mac:"macOS",win:"Windows",linux:"Linux"};
 
 const tools=[
   {name:"Gmail",src:"/logos/gmail.svg"},
@@ -113,8 +108,7 @@ function getNextTickMs():number{
 export default function Home(){
   const[taskCount,setTaskCount]=useState(0);
   const[bump,setBump]=useState(false);
-  const[showWaitlist,setShowWaitlist]=useState(false);
-  const[waitlistDone,setWaitlistDone]=useState(false);
+  const[os,setOs]=useState<OS>("win");
 
   // Initialize and tick the counter at variable intervals
   useEffect(()=>{
@@ -137,16 +131,11 @@ export default function Home(){
     if(bump){const t=setTimeout(()=>setBump(false),350);return()=>clearTimeout(t);}
   },[bump]);
 
+  useEffect(()=>{setOs(detectOS())},[]);
   useEffect(()=>{document.title="Outdoors"},[]);
   useEffect(()=>{const f=()=>document.getElementById("nav")?.classList.toggle("scrolled",window.scrollY>20);window.addEventListener("scroll",f,{passive:true});return()=>window.removeEventListener("scroll",f)},[]);
   useEffect(()=>{const obs=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add("show")}),{threshold:0,rootMargin:"0px 0px 120px 0px"});document.querySelectorAll(".rv").forEach(el=>obs.observe(el));return()=>obs.disconnect()},[]);
   useEffect(()=>{const t=setTimeout(()=>{const ms=document.getElementById("waChat");if(!ms)return;const bs=ms.querySelectorAll(".m");if(bs[0]?.classList.contains("v"))return;bs.forEach((b,i)=>{setTimeout(()=>{b.classList.add("v");ms.scrollTop=ms.scrollHeight},i*400)})},300);return()=>clearTimeout(t)},[]);
-  useEffect(()=>{
-    if(!showWaitlist)return;
-    const onKey=(ev:KeyboardEvent)=>{if(ev.key==="Escape"){setShowWaitlist(false);setWaitlistDone(false)}};
-    window.addEventListener("keydown",onKey);
-    return()=>window.removeEventListener("keydown",onKey);
-  },[showWaitlist]);
 
   const steps=[{l:"Text it",d:"Tell Outdoors what you need at Rice: Canvas, Handshake, ESTHER, or email."},{l:"It takes over",d:"It opens your real accounts and handles the clicks."},{l:"It does the work",d:"Submits assignments, sends outreach, and updates docs."},{l:"Done",d:"Finished before your next class starts."}];
   const caps=[
@@ -159,7 +148,7 @@ export default function Home(){
   ];
 
   return(<><style dangerouslySetInnerHTML={{__html:css}}/>
-  <nav id="nav"><a href="#" className="logo">Outdoors.rice</a><button className="btn-primary" style={{padding:"9px 22px",fontSize:".84rem"}} onClick={()=>setShowWaitlist(true)}>Join Waitlist</button></nav>
+  <nav id="nav"><a href="#" className="logo">Outdoors.rice</a><a href={DL_URLS[os]} className="btn-primary" style={{padding:"9px 22px",fontSize:".84rem"}}>Download</a></nav>
   <div className="counter-bar">Free for .edu {taskCount>0&&<><span className={`counter-num${bump?" counter-bump":""}`}> - {taskCount.toLocaleString()}</span> tasks completed and counting</>}</div>
   <section className="hero">
     <h1>Get off Fizz and get Outdoors.</h1>
@@ -183,22 +172,8 @@ export default function Home(){
   <section className="pricing-section" id="tasks"><div className="pricing-inner"><div className="sec-hd rv"><div className="lbl">Daily limits</div><h2>You get 30 tasks per day, and +10 more per person you refer.</h2></div>
     <div className="trust-row"><div className="ti"><strong>30 tasks/day</strong><span>Included for every Rice student</span></div><div className="ti"><strong>+10 per referral</strong><span>Added for each person you refer</span></div><div className="ti"><strong>Resets daily</strong><span>Fresh task balance every morning</span></div></div>
   </div></section>
-  <section className="cta-final" id="cta"><h2 className="rv">Interested? Text the people who built it.</h2><a href="sms:8032920205" className="phone-big rv">(803) 292-0205</a><p className="phone-hint rv">That{"'"}s a real person. Text us right now.</p></section>
-  <footer><div className="fi"><span className="logo">outdoors</span><ul className="fl"><li><a href="#steps">Product</a></li><li><a href="#tasks">Daily Limits</a></li></ul><span className="fn">Built at Rice University</span></div></footer>
-  {showWaitlist&&<div className="waitlist-overlay" onClick={e=>{if(e.target===e.currentTarget){setShowWaitlist(false);setWaitlistDone(false)}}}>
-    <div className="waitlist-modal">
-      {waitlistDone?<div className="waitlist-success">You{"'"}re on the list! We{"'"}ll reach out soon.</div>:<>
-        <h3>Join the Waitlist</h3>
-        <p>Enter your name and Rice email. We{"'"}ll let you know when it{"'"}s your turn.</p>
-        <form className="waitlist-form" onSubmit={async e=>{e.preventDefault();const fd=new FormData(e.currentTarget);const name=fd.get("name")as string;const email=fd.get("email")as string;if(!name||!email)return;try{await fetch(SU,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:`name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`});setWaitlistDone(true)}catch{setWaitlistDone(true)}}}>
-          <input name="name" placeholder="Your name" required/>
-          <input name="email" type="email" placeholder="Rice email (.edu)" required/>
-          <button type="submit">Get Early Access</button>
-        </form>
-      </>}
-      <button className="waitlist-close" onClick={()=>{setShowWaitlist(false);setWaitlistDone(false)}}>Close</button>
-    </div>
-  </div>}
+  <section className="cta-final" id="download"><h2 className="rv">Ready to get Outdoors?</h2><p className="rv">Free. No account needed.</p><div className="rv" style={{marginTop:"20px"}}><a href={DL_URLS[os]} className="btn-primary" style={{padding:"15px 36px",fontSize:"1rem"}}>Download for {OS_LABELS[os]}</a></div><div className="dl-alt rv">{(Object.keys(DL_URLS) as OS[]).filter(k=>k!==os).map(k=><a key={k} href={DL_URLS[k]}>{OS_LABELS[k]}</a>)}</div><div style={{marginTop:"28px"}}><a href="sms:8032920205" className="phone-big rv" style={{fontSize:"clamp(1.2rem,2.5vw,1.8rem)"}}>(803) 292-0205</a><p className="phone-hint rv">Questions? Text us — that{"'"}s a real person.</p></div></section>
+  <footer><div className="fi"><span className="logo">outdoors</span><ul className="fl"><li><a href="#steps">Product</a></li><li><a href="#download">Download</a></li><li><a href="#tasks">Daily Limits</a></li></ul><span className="fn">Built at Rice University</span></div></footer>
   </>)
 }
 
