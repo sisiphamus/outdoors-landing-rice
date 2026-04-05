@@ -166,7 +166,8 @@ export default function Home(){
     {lbl:"Files",t:"Organized in minutes",d:"Organize Drive folders for classes, research, and recruiting instantly."},
   ];
 
-  const toolSet=tools.map((t,i)=><img key={i} className="tool-icon" src={t.src} alt={t.name} title={t.name}/>);
+  // Repeat tools enough times to always overflow the viewport
+  const toolsX4=[...tools,...tools,...tools,...tools];
 
   return(<><style dangerouslySetInnerHTML={{__html:css}}/>
   <nav id="nav"><a href="#" className="logo">Outdoors.rice</a><a href={DL_URLS[os]} className="btn-primary" style={{padding:"9px 22px",fontSize:".84rem"}}>Download</a><div id="nav-progress"/></nav>
@@ -181,7 +182,7 @@ export default function Home(){
     <div className="hero-ctas"><a href="sms:8032920205" className="btn-phone">Talk to us: (803) 292-0205</a><a href="#steps" className="btn-text">How it works</a></div>
   </section>
   <div className="phone-wrap"><div className="iphone"><div className="iphone-screen"><div className="di"/><div className="ios-bar"><div className="ios-time">9:15</div><div className="ios-icons"><div className="ios-sig"><span/><span/><span/><span/></div><div className="ios-bt"><div className="ios-bt-b"><div className="ios-bt-f"/></div><div className="ios-bt-t"/></div></div></div><div className="msg-hdr"><span className="msg-back">&lsaquo;</span><div className="msg-av">O</div><div className="msg-name">Outdoors</div></div><div className="msgs" id="waChat"><div className="mt">Today 9:14 AM</div><div className="m o">Email the team I{"'"}ll be 15 min late. Keep it casual.</div><div className="md">Delivered</div><div className="m i">Done. Sent from your Gmail: {"\u201c"}Running ~15 min behind. Start without me.{"\u201d"}</div><div className="m o">Compile all my performative pictures into a file and use them to create a Hinge account.</div><div className="mt">Read 9:14 AM</div><div className="m i">Done. Photos are organized and a Hinge profile draft is ready for review.</div><div className="m o">Build me a landing page.</div><div className="mt">Read 9:15 AM</div><div className="m i">You{"'"}re looking at it.</div></div><div className="msg-in"><div className="msg-field">Message</div><div className="msg-send">+</div></div><div className="ios-home-i"><div className="ios-home-bar"/></div></div></div></div>
-  <div className="tool-strip"><div className="tool-track"><div className="tool-set">{toolSet}</div><div className="tool-set">{tools.map((t,i)=><img key={`dup-${i}`} className="tool-icon" src={t.src} alt={t.name} title={t.name}/>)}</div></div></div>
+  <div className="tool-strip"><div className="tool-track"><div className="tool-set">{toolsX4.map((t,i)=><img key={`a-${i}`} className="tool-icon" src={t.src} alt={t.name} title={t.name}/>)}</div><div className="tool-set">{toolsX4.map((t,i)=><img key={`b-${i}`} className="tool-icon" src={t.src} alt={t.name} title={t.name}/>)}</div></div></div>
   <div className="proof"><div className="proof-inner"><div className="proof-item"><img className="proof-logo" src="/logos/rice.svg" alt="Rice University"/></div></div></div>
   <section className="manifesto rv"><div className="manifesto-inner"><p>The students who win are the ones who <span>automate the busywork.</span></p></div></section>
   <section className="steps" id="steps"><div className="steps-inner"><div className="sec-hd rv"><div className="lbl">How it works</div><h2>You shouldn{"'"}t have to do work a machine can do.</h2></div><div className="steps-row">{steps.map((s,i)=><div key={s.l} className="si rv" style={{transitionDelay:`${i*50}ms`}}><div className="si-n">0{i+1}</div><div className="si-t">{s.l}</div><p className="si-d">{s.d}</p></div>)}</div></div></section>
