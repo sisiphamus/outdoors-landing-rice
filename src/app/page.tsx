@@ -177,9 +177,9 @@ export default function Home(){
   <section className="hero">
     <h1>{words.map((w,i)=><span key={i} className="hero-word" style={{animationDelay:`${i*60}ms`,marginRight:i<words.length-1?".3em":0}}>{w}</span>)}</h1>
     <ul className="hero-benefits">
-      <li>Apply to 20 internships in Handshake, tracked in Sheets automatically</li>
-      <li>Submit Canvas assignments and draft discussion replies while you sleep</li>
-      <li>Inbox summarized at 7 AM with a prioritized daily plan</li>
+      <li>Apply to 20 internships and create a Google Sheets to track progress</li>
+      <li>I{"'"}m gonna sleep, can you check my Canvas assignments for this week and send me a wake up email with to-dos</li>
+      <li>Tell me what{"'"}s the best servery food today</li>
     </ul>
     <div className="hero-ctas"><a href="sms:8032920205" className="btn-phone">Talk to us: (803) 292-0205</a><a href="#steps" className="btn-text">How it works</a></div>
   </section>
