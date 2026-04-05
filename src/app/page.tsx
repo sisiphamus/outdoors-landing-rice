@@ -160,7 +160,7 @@ export default function Home(){
   const[busyIdx,setBusyIdx]=useState(0);
   const[busyPaused,setBusyPaused]=useState(false);
   const[showDl,setShowDl]=useState(false);
-  const txtPhrases=["Text us","Text Outdoors","Don't text your ex"];
+  const txtPhrases=["Text the creator"];
   const[txtIdx,setTxtIdx]=useState(0);
   const natureImgs=["/images/20251004_144654.webp","/images/20251015_205903.webp","/images/20251122_213844.webp","/images/20251127_083555.webp","/images/20251230_080722.webp","/images/xp-bliss.jpg"];
   const[natureIdx,setNatureIdx]=useState(0);
@@ -181,12 +181,6 @@ export default function Home(){
     const id=setInterval(()=>setBusyIdx(p=>(p+1)%busyWords.length),500);
     return()=>clearInterval(id);
   },[busyPaused,busyWords.length]);
-
-  // Text button phrase rotation
-  useEffect(()=>{
-    const id=setInterval(()=>setTxtIdx(p=>(p+1)%txtPhrases.length),2000);
-    return()=>clearInterval(id);
-  },[txtPhrases.length]);
 
   // Nature image rotation
   useEffect(()=>{
@@ -273,7 +267,7 @@ export default function Home(){
       <li>I{"'"}m gonna sleep, can you check my Canvas assignments for this week and send me a wake up email with to-dos</li>
       <li>Tell me what{"'"}s the best servery food today</li>
     </ul>
-    <div className="hero-ctas"><a href="sms:8032920205" className="btn-phone"><span className="txt-rotate"><span className="txt-word" key={txtIdx}>{txtPhrases[txtIdx]}</span></span>: (803) 292-0205</a><a href="#steps" className="btn-text">How it works</a></div>
+    <div className="hero-ctas"><a href="sms:8032920205" className="btn-phone">Text the creator: (803) 292-0205</a><a href="#steps" className="btn-text">How it works</a></div>
   </section>
 
   <div className="phone-wrap"><div className="iphone"><div className="iphone-screen"><div className="di"/><div className="ios-bar"><div className="ios-time">9:15</div><div className="ios-icons"><div className="ios-sig"><span/><span/><span/><span/></div><div className="ios-bt"><div className="ios-bt-b"><div className="ios-bt-f"/></div><div className="ios-bt-t"/></div></div></div><div className="msg-hdr"><span className="msg-back">&lsaquo;</span><div className="msg-av">O</div><div className="msg-name">Outdoors</div></div><div className="msgs" id="waChat"><div className="mt">Today 9:14 AM</div><div className="m o">Email the team I{"'"}ll be 15 min late. Keep it casual.</div><div className="md">Delivered</div><div className="m i">Done. Sent from your Gmail: {"\u201c"}Running ~15 min behind. Start without me.{"\u201d"}</div><div className="m o">Compile all my performative pictures into a file and use them to create a Hinge account.</div><div className="mt">Read 9:14 AM</div><div className="m i">Done. Photos are organized and a Hinge profile draft is ready for review.</div><div className="m o">Build me a landing page.</div><div className="mt">Read 9:15 AM</div><div className="m i">You{"'"}re looking at it.</div></div><div className="msg-in"><div className="msg-field">Message</div><div className="msg-send">+</div></div><div className="ios-home-i"><div className="ios-home-bar"/></div></div></div></div>
