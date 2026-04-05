@@ -4,4 +4,4 @@ pages_build_output_dir = "out"
 
 [[kv_namespaces]]
 binding = "WAITLIST_EMAILS"
-id = "fadd57dd9783452f9709816c48165f77"
+id = "acdb25aa749d41359f6ca6793d55e547"
