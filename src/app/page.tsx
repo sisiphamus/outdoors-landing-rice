@@ -79,7 +79,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 
 /* ── CTA FINAL ── */
 .cta-final{padding:clamp(48px,8vw,80px) 24px;text-align:center}.cta-final h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;letter-spacing:-.03em;margin-bottom:8px;text-wrap:balance;color:var(--text-1);line-height:1.2}.cta-final>p{color:var(--text-2);font-size:.95rem;margin-bottom:28px;line-height:1.6}
-.nature-word{display:inline-block;width:clamp(2.2rem,5vw,3.8rem);height:clamp(2.2rem,5vw,3.8rem);border-radius:clamp(6px,1vw,10px);overflow:hidden;vertical-align:middle;position:relative;box-shadow:var(--shadow-1)}.nature-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:natureIn .5s var(--ease) both}@keyframes natureIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}
+.nature-word{display:inline-block;width:clamp(3rem,7vw,5rem);height:clamp(3rem,7vw,5rem);border-radius:clamp(8px,1.2vw,14px);overflow:hidden;vertical-align:middle;position:relative;box-shadow:var(--shadow-1)}.nature-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:natureIn .5s var(--ease) both}@keyframes natureIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}
 .cta-final .limits{font-family:var(--font-display);font-size:clamp(1rem,1.8vw,1.25rem);color:var(--text-2);margin-bottom:32px;letter-spacing:-.01em}.cta-final .limits strong{color:var(--accent);font-weight:400}
 .cta-final .phone-big{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2.2rem);color:var(--accent);text-decoration:none;display:block;margin-bottom:8px;letter-spacing:-.01em;transition:opacity .2s}.cta-final .phone-big:hover{opacity:.7}.cta-final .phone-hint{font-size:.8rem;color:var(--text-3);margin-bottom:0}
 
@@ -162,7 +162,7 @@ export default function Home(){
   const[showDl,setShowDl]=useState(false);
   const txtPhrases=["Text the creator"];
   const[txtIdx,setTxtIdx]=useState(0);
-  const natureImgs=["/images/20251004_144654.webp","/images/20251015_205903.webp","/images/20251122_213844.webp","/images/20251127_083555.webp","/images/20251230_080722.webp","/images/xp-bliss.jpg"];
+  const natureImgs=["/images/forest1.jpg","/images/forest2.jpg","/images/forest3.jpg","/images/forest4.jpg","/images/forest5.jpg","/images/forest6.jpg"];
   const[natureIdx,setNatureIdx]=useState(0);
 
   // Counter
