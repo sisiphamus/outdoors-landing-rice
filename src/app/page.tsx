@@ -6,9 +6,9 @@ const css = `
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);background:var(--bg);color:var(--text-1);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
 
 /* ── NAV: floating glass pill ── */
-nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(92%,640px);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;border-radius:9999px;overflow:hidden;backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);-webkit-backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);background:rgba(248,247,244,.6);border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 2px 8px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);transition:background-color .3s var(--snappy),box-shadow .3s var(--snappy)}
+nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(92%,640px);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;border-radius:9999px;backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);-webkit-backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);background:rgba(248,247,244,.6);border:2px solid transparent;box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 2px 8px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);transition:background-color .3s var(--snappy),box-shadow .3s var(--snappy);--prog:0}
 nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.75),0 4px 16px rgba(0,0,0,.12),0 12px 32px rgba(0,0,0,.08)}
-#nav-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0%;transition:width .08s linear;opacity:.4}
+#nav-progress{display:none}
 .logo{font-family:var(--font-display);font-size:1.4rem;color:var(--text-1);text-decoration:none}
 
 /* ── BUTTONS ── */
@@ -79,7 +79,7 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 
 /* ── CTA FINAL ── */
 .cta-final{padding:clamp(48px,8vw,80px) 24px;text-align:center}.cta-final h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;letter-spacing:-.03em;margin-bottom:8px;text-wrap:balance;color:var(--text-1);line-height:1.2}.cta-final>p{color:var(--text-2);font-size:.95rem;margin-bottom:28px;line-height:1.6}
-.nature-word{display:inline-block;width:clamp(3rem,7vw,5rem);height:clamp(3rem,7vw,5rem);border-radius:clamp(8px,1.2vw,14px);overflow:hidden;vertical-align:middle;position:relative;box-shadow:var(--shadow-1)}.nature-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:natureIn .5s var(--ease) both}@keyframes natureIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}
+.nature-word{display:inline-block;width:clamp(4rem,9vw,6.5rem);height:clamp(4rem,9vw,6.5rem);border-radius:clamp(10px,1.5vw,18px);overflow:hidden;vertical-align:middle;position:relative;box-shadow:var(--shadow-1)}.nature-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;animation:natureIn .5s var(--ease) both}@keyframes natureIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}
 .cta-final .limits{font-family:var(--font-display);font-size:clamp(1rem,1.8vw,1.25rem);color:var(--text-2);margin-bottom:32px;letter-spacing:-.01em}.cta-final .limits strong{color:var(--accent);font-weight:400}
 .cta-final .phone-big{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2.2rem);color:var(--accent);text-decoration:none;display:block;margin-bottom:8px;letter-spacing:-.01em;transition:opacity .2s}.cta-final .phone-big:hover{opacity:.7}.cta-final .phone-hint{font-size:.8rem;color:var(--text-3);margin-bottom:0}
 
@@ -88,8 +88,9 @@ footer{padding:24px 24px;border-top:1px solid rgba(0,0,0,.04)}.fi{max-width:var(
 
 /* ── DOWNLOAD MODAL ── */
 .dl-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200;animation:dlFadeIn .2s ease}@keyframes dlFadeIn{from{opacity:0}to{opacity:1}}
-.dl-modal{width:min(420px,100%);border-radius:24px;padding:36px 32px;text-align:center;backdrop-filter:blur(24px) saturate(1.8) brightness(1.05);-webkit-backdrop-filter:blur(24px) saturate(1.8) brightness(1.05);background:rgba(248,247,244,.85);border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 8px 32px rgba(0,0,0,.15),0 24px 64px rgba(0,0,0,.1);animation:dlSlideIn .3s var(--ease)}@keyframes dlSlideIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-.dl-modal h3{font-family:var(--font-display);font-size:1.5rem;font-weight:400;margin-bottom:6px;color:var(--text-1)}.dl-modal p{font-size:.88rem;color:var(--text-2);margin-bottom:20px;line-height:1.5}
+.dl-modal{width:min(520px,94%);border-radius:28px;padding:44px 40px;text-align:center;backdrop-filter:blur(24px) saturate(1.8) brightness(1.05);-webkit-backdrop-filter:blur(24px) saturate(1.8) brightness(1.05);background:rgba(248,247,244,.85);border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 8px 32px rgba(0,0,0,.15),0 24px 64px rgba(0,0,0,.1);animation:dlSlideIn .3s var(--ease)}@keyframes dlSlideIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.dl-modal h3{font-family:var(--font-display);font-size:1.8rem;font-weight:400;margin-bottom:8px;color:var(--text-1)}.dl-modal p{font-size:.9rem;color:var(--text-2);margin-bottom:24px;line-height:1.55}
+.dl-mobile-msg{background:rgba(61,107,61,.06);border:1px solid rgba(61,107,61,.15);border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.84rem;color:var(--text-2);line-height:1.5;text-align:center}
 .dl-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .dl-opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:16px;border:1.5px solid rgba(0,0,0,.06);background:rgba(255,255,255,.5);text-decoration:none;color:var(--text-1);font-family:var(--font-body);font-size:.9rem;font-weight:500;transition:all .2s var(--snappy);cursor:pointer}
 .dl-opt:hover{background:rgba(255,255,255,.8);border-color:rgba(255,255,255,.6);box-shadow:var(--shadow-1);transform:translateY(-1px)}
@@ -160,6 +161,7 @@ export default function Home(){
   const[busyIdx,setBusyIdx]=useState(0);
   const[busyPaused,setBusyPaused]=useState(false);
   const[showDl,setShowDl]=useState(false);
+  const[isMobile,setIsMobile]=useState(false);
   const txtPhrases=["Text the creator"];
   const[txtIdx,setTxtIdx]=useState(0);
   const natureImgs=["/images/forest1.jpg","/images/forest2.jpg","/images/forest3.jpg","/images/forest4.jpg","/images/forest5.jpg","/images/forest6.jpg"];
@@ -193,7 +195,7 @@ export default function Home(){
     const onKey=(e:KeyboardEvent)=>{if(e.key==="Escape")setShowDl(false)};
     window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey);
   },[showDl]);
-  useEffect(()=>{setOs(detectOS())},[]);
+  useEffect(()=>{setOs(detectOS());setIsMobile(/iPhone|iPad|Android|Mobile/i.test(navigator.userAgent))},[]);
   useEffect(()=>{document.title="Outdoors"},[]);
 
   // Nav scroll state
@@ -212,11 +214,17 @@ export default function Home(){
   // iMessage chat animation
   useEffect(()=>{const t=setTimeout(()=>{const ms=document.getElementById("waChat");if(!ms)return;const bs=ms.querySelectorAll(".m");if(bs[0]?.classList.contains("v"))return;bs.forEach((b,i)=>{setTimeout(()=>{b.classList.add("v");ms.scrollTop=ms.scrollHeight},i*400)})},600);return()=>clearTimeout(t)},[]);
 
-  // Nav progress bar
+  // Nav progress border
   useEffect(()=>{
-    const bar=document.getElementById("nav-progress");
-    if(!bar)return;
-    const onScroll=()=>{const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);bar.style.width=`${Math.min(100,pct*100)}%`};
+    const nav=document.getElementById("nav");
+    if(!nav)return;
+    const onScroll=()=>{
+      const pct=Math.min(1,window.scrollY/(document.body.scrollHeight-window.innerHeight));
+      const deg=Math.round(pct*360);
+      if(deg<1){nav.style.borderImage="none";nav.style.borderColor="transparent";return}
+      nav.style.borderImage=`conic-gradient(from 0deg,var(--accent) ${deg}deg,rgba(255,255,255,.25) ${deg}deg) 1`;
+      nav.style.borderImageSlice="1";
+    };
     window.addEventListener("scroll",onScroll,{passive:true});
     return()=>window.removeEventListener("scroll",onScroll);
   },[]);
@@ -287,15 +295,16 @@ export default function Home(){
   <section className="cta-final rv" id="download"><h2>Stop wasting time, get <span className="nature-word"><img key={natureIdx} className="nature-img" src={natureImgs[natureIdx]} alt="outdoors"/></span></h2><p>Free. No account needed.</p><p className="limits"><strong>30 tasks/day</strong> free for every Rice student. Refer a friend: <strong>+10 more</strong>.</p><div style={{marginTop:"4px"}}><button className="btn-primary" style={{padding:"14px 36px",fontSize:".95rem"}} onClick={()=>setShowDl(true)}>Download</button></div><div style={{marginTop:"32px"}}><a href="sms:8032920205" className="phone-big">(803) 292-0205</a><p className="phone-hint">Questions? Text us · that{"'"}s a real person.</p></div></section>
 
   {showDl&&<div className="dl-overlay" onClick={e=>{if(e.target===e.currentTarget)setShowDl(false)}}>
-    <div className="dl-modal">
+    <div className="dl-modal" style={{position:"relative"}}>
+      <button onClick={()=>setShowDl(false)} style={{position:"absolute",top:"16px",right:"18px",background:"none",border:"none",fontSize:"1.3rem",color:"var(--text-3)",cursor:"pointer",lineHeight:1,padding:"4px",transition:"color .2s"}} onMouseEnter={e=>(e.currentTarget.style.color="var(--text-1)")} onMouseLeave={e=>(e.currentTarget.style.color="var(--text-3)")}>&#x2715;</button>
       <h3>Download Outdoors</h3>
-      <p>We connect to Codex for free credits, then sign in with WhatsApp</p>
+      <p>We connect to <strong>Codex</strong> for free credits, then sign in with WhatsApp</p>
+      {isMobile&&<div className="dl-mobile-msg">Outdoors is a desktop app. Open this page on your laptop to download.</div>}
       <div className="dl-options">
         <a href={DL_URLS.win} className={`dl-opt${os==="win"?" active":""}`}><span className="dl-opt-icon">{"\uD83E\uDE9F"}</span><div className="dl-opt-info"><div className="dl-opt-name">Windows</div><div className="dl-opt-note">Download .exe installer</div></div></a>
         <a href={DL_URLS.mac} className={`dl-opt${os==="mac"?" active":""}`}><span className="dl-opt-icon">{"\uD83C\uDF4E"}</span><div className="dl-opt-info"><div className="dl-opt-name">macOS</div><div className="dl-opt-note">Download .dmg · read the README to install</div></div></a>
         <a href={DL_URLS.linux} className={`dl-opt${os==="linux"?" active":""}`}><span className="dl-opt-icon">{"\uD83D\uDDA5\uFE0F"}</span><div className="dl-opt-info"><div className="dl-opt-name">Linux</div><div className="dl-opt-note">Download latest .AppImage or .deb</div></div></a>
       </div>
-      <button className="dl-close" onClick={()=>setShowDl(false)}>Close</button>
     </div>
   </div>}
   <footer><div className="fi"><span className="logo" style={{fontSize:"1.1rem"}}>outdoors</span><ul className="fl"><li><a href="#steps">Product</a></li><li><a href="#download">Download</a></li></ul><span className="fn">Built at Rice University</span></div></footer>
