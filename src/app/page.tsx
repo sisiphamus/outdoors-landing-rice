@@ -91,6 +91,7 @@ footer{padding:24px 24px;border-top:1px solid rgba(0,0,0,.04)}.fi{max-width:var(
 .dl-modal{width:min(520px,94%);border-radius:28px;padding:44px 40px;text-align:center;backdrop-filter:blur(24px) saturate(1.8) brightness(1.05);-webkit-backdrop-filter:blur(24px) saturate(1.8) brightness(1.05);background:rgba(248,247,244,.85);border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 8px 32px rgba(0,0,0,.15),0 24px 64px rgba(0,0,0,.1);animation:dlSlideIn .3s var(--ease)}@keyframes dlSlideIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
 .dl-modal h3{font-family:var(--font-display);font-size:1.8rem;font-weight:400;margin-bottom:8px;color:var(--text-1)}.dl-modal p{font-size:.9rem;color:var(--text-2);margin-bottom:24px;line-height:1.55}
 .dl-mobile-msg{background:rgba(61,107,61,.06);border:1px solid rgba(61,107,61,.15);border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.84rem;color:var(--text-2);line-height:1.5;text-align:center}
+.dl-notice{background:rgba(61,107,61,.05);border:1px solid rgba(61,107,61,.12);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:.82rem;color:var(--text-2);line-height:1.5;text-align:left}.dl-notice strong{color:var(--accent);font-weight:600}
 .dl-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .dl-opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:16px;border:1.5px solid rgba(0,0,0,.06);background:rgba(255,255,255,.5);text-decoration:none;color:var(--text-1);font-family:var(--font-body);font-size:.9rem;font-weight:500;transition:all .2s var(--snappy);cursor:pointer}
 .dl-opt:hover{background:rgba(255,255,255,.8);border-color:rgba(255,255,255,.6);box-shadow:var(--shadow-1);transform:translateY(-1px)}
@@ -251,7 +252,7 @@ export default function Home(){
   const caps=[
     {lbl:"Email",t:"Email your prof you're sick. From bed. Convincingly.",icon:"/logos/gmail.svg"},
     {lbl:"Calendar",t:"Create, invite, make recurring, add Meet links...",icon:"/logos/gcal.svg"},
-    {lbl:"Canvas",t:"Check due dates, submit work, reply to discussions while you nap.",icon:"/logos/canvas.svg"},
+    {lbl:"Canvas",t:"Check due dates, submit work, reply to discussions while you nap.",icon:"/logos/canvas.png"},
     {lbl:"Sheets",t:"Track 47 internship apps without opening a single tab.",icon:"/logos/gsheets.svg"},
     {lbl:"Messaging",t:"Follow-ups on autopilot",icon:"/logos/slack.svg"},
     {lbl:"Drive",t:"Find that one file from COMP 140 in 3 seconds flat.",icon:"/logos/gdrive.svg"},
@@ -298,6 +299,7 @@ export default function Home(){
       <h3>Download Outdoors</h3>
       <p>We connect to <strong>Codex</strong> for free credits, then sign in with WhatsApp</p>
       {isMobile&&<div className="dl-mobile-msg">Outdoors is a desktop app. Open this page on your laptop to download.</div>}
+      <div className="dl-notice">You{"'"}ll need to verify you{"'"}re a student so GPT will give free credits. Have your <strong>student ID</strong> ready.</div>
       <div className="dl-options">
         <a href={DL_URLS.win} className={`dl-opt${os==="win"?" active":""}`}><span className="dl-opt-icon">{"\uD83E\uDE9F"}</span><div className="dl-opt-info"><div className="dl-opt-name">Windows</div><div className="dl-opt-note">Download .exe installer</div></div></a>
         <a href={DL_URLS.mac} className={`dl-opt${os==="mac"?" active":""}`}><span className="dl-opt-icon">{"\uD83C\uDF4E"}</span><div className="dl-opt-info"><div className="dl-opt-name">macOS</div><div className="dl-opt-note">Download .dmg · read the README to install</div></div></a>
