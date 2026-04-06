@@ -6,9 +6,9 @@ const css = `
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);background:var(--bg);color:var(--text-1);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
 
 /* ── NAV: floating glass pill ── */
-nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(92%,640px);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;border-radius:9999px;backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);-webkit-backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);background:rgba(248,247,244,.6);border:2px solid transparent;box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 2px 8px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);transition:background-color .3s var(--snappy),box-shadow .3s var(--snappy);--prog:0}
+nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:min(92%,640px);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;border-radius:9999px;backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);-webkit-backdrop-filter:blur(40px) saturate(2.2) brightness(1.08);background:rgba(248,247,244,.6);border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.8),0 2px 8px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);transition:background-color .3s var(--snappy),box-shadow .3s var(--snappy)}
+.nav-ring{position:fixed;top:10px;left:50%;transform:translateX(-50%);width:min(calc(92% + 4px),644px);height:calc(var(--nav-h) + 4px);border-radius:9999px;z-index:99;pointer-events:none;padding:2px;background:conic-gradient(from 0deg,var(--accent) var(--prog),transparent var(--prog));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
 nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.75),0 4px 16px rgba(0,0,0,.12),0 12px 32px rgba(0,0,0,.08)}
-#nav-progress{display:none}
 .logo{font-family:var(--font-display);font-size:1.4rem;color:var(--text-1);text-decoration:none}
 
 /* ── BUTTONS ── */
@@ -49,9 +49,9 @@ nav.scrolled{background:rgba(248,247,244,.82);box-shadow:inset 0 1px 0 0 rgba(25
 .lbl{font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}.sec-hd{text-align:center;margin-bottom:40px}.sec-hd h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.2vw,2.6rem);font-weight:400;letter-spacing:-.03em;text-wrap:balance;color:var(--text-1)}
 
 /* ── MANIFESTO: dark + glass card ── */
-.manifesto{padding:clamp(80px,14vw,160px) 24px;text-align:center;background:#141a14;position:relative;overflow:hidden}
+.manifesto{padding:clamp(80px,14vw,160px) 24px;text-align:left;background:#141a14;position:relative;overflow:hidden}
 .manifesto::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(61,107,61,.12),transparent 70%);pointer-events:none}
-.manifesto-glass{max-width:780px;margin:0 auto;padding:clamp(40px,6vw,64px) clamp(28px,5vw,48px);border-radius:28px;backdrop-filter:blur(24px) saturate(1.6) brightness(.8);-webkit-backdrop-filter:blur(24px) saturate(1.6) brightness(.8);background:rgba(18,24,18,.75);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.16),inset 0 -1px 0 0 rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.45),0 16px 48px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.manifesto-glass{max-width:780px;margin:0 auto;text-align:left;padding:clamp(40px,6vw,64px) clamp(28px,5vw,48px);border-radius:28px;backdrop-filter:blur(24px) saturate(1.6) brightness(.8);-webkit-backdrop-filter:blur(24px) saturate(1.6) brightness(.8);background:rgba(18,24,18,.75);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 0 rgba(255,255,255,.16),inset 0 -1px 0 0 rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.45),0 16px 48px rgba(0,0,0,.3);position:relative;overflow:hidden}
 .manifesto-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(100,160,100,.08) 0%,rgba(100,160,100,0) 30%);pointer-events:none}
 .manifesto-glass p{font-family:var(--font-display);font-size:clamp(1.8rem,4.5vw,3.2rem);line-height:1.25;color:rgba(255,255,255,.92);letter-spacing:-.03em;text-shadow:0 1px 4px rgba(0,0,0,.25);position:relative;z-index:1}
 .manifesto-glass p span{color:#8ab98a;font-style:italic}
@@ -214,16 +214,13 @@ export default function Home(){
   // iMessage chat animation
   useEffect(()=>{const t=setTimeout(()=>{const ms=document.getElementById("waChat");if(!ms)return;const bs=ms.querySelectorAll(".m");if(bs[0]?.classList.contains("v"))return;bs.forEach((b,i)=>{setTimeout(()=>{b.classList.add("v");ms.scrollTop=ms.scrollHeight},i*400)})},600);return()=>clearTimeout(t)},[]);
 
-  // Nav progress border
+  // Nav progress ring
   useEffect(()=>{
-    const nav=document.getElementById("nav");
-    if(!nav)return;
+    const ring=document.getElementById("nav-ring");
+    if(!ring)return;
     const onScroll=()=>{
       const pct=Math.min(1,window.scrollY/(document.body.scrollHeight-window.innerHeight));
-      const deg=Math.round(pct*360);
-      if(deg<1){nav.style.borderImage="none";nav.style.borderColor="transparent";return}
-      nav.style.borderImage=`conic-gradient(from 0deg,var(--accent) ${deg}deg,rgba(255,255,255,.25) ${deg}deg) 1`;
-      nav.style.borderImageSlice="1";
+      ring.style.setProperty("--prog",`${Math.round(pct*360)}deg`);
     };
     window.addEventListener("scroll",onScroll,{passive:true});
     return()=>window.removeEventListener("scroll",onScroll);
@@ -264,7 +261,8 @@ export default function Home(){
   const toolsX4=[...tools,...tools,...tools,...tools];
 
   return(<><style dangerouslySetInnerHTML={{__html:css}}/>
-  <nav id="nav"><a href="#" className="logo" style={{display:"flex",alignItems:"center",gap:"8px"}}><img src="/logo-outdoors.svg" alt="Outdoors" style={{height:"28px",width:"auto"}}/><span>Outdoors.rice</span></a><button className="btn-primary" onClick={()=>setShowDl(true)}>Download</button><div id="nav-progress"/></nav>
+  <div id="nav-ring" className="nav-ring" style={{"--prog":"0deg"} as any}/>
+  <nav id="nav"><a href="#" className="logo" style={{display:"flex",alignItems:"center",gap:"8px"}}><img src="/logo-outdoors.svg" alt="Outdoors" style={{height:"28px",width:"auto"}}/><span>Outdoors.rice</span></a><button className="btn-primary" onClick={()=>setShowDl(true)}>Download</button></nav>
 
   <div className="counter-bar">{taskCount>0&&<><span className={`counter-num${bump?" counter-bump":""}`}>{taskCount.toLocaleString()}</span> tasks completed · free for Rice students</>}</div>
 
